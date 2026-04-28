@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Properties">
+<title>Holt Lunsford Holdings — Property Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8F4EC;--surface:#FFF;--ink:#1A1916;--ink-mid:#4A4740;--ink-soft:#6B675E;--ink-light:#9A968C;
+  --gold:#B08A2E;--gold-light:#D4AF62;--teal:#276663;--coral:#BE4432;
+  --border:rgba(26,25,22,0.10);--border-soft:rgba(26,25,22,0.06);
+  --radius:10px;--shadow:0 1px 3px rgba(26,25,22,0.07),0 1px 8px rgba(26,25,22,0.04);
+  --serif:'DM Serif Display',Georgia,'Times New Roman',serif;--sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);font-weight:300;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+
+.site-header{background:var(--ink);color:var(--cream);padding:0 2.5rem;display:flex;align-items:stretch;position:sticky;top:0;z-index:100;}
+.header-brand{display:flex;flex-direction:column;justify-content:center;padding:1rem 0;border-right:1px solid rgba(255,255,255,0.1);padding-right:1.75rem;margin-right:1.75rem;}
+.brand-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);font-weight:400;margin-bottom:3px;}
+.brand-name{font-family:var(--serif);font-size:20px;font-weight:400;}
+.header-nav{display:flex;align-items:stretch;flex:1;}
+.nav-btn{background:none;border:none;color:rgba(247,244,238,0.5);font-family:var(--sans);font-size:13px;font-weight:300;padding:0 1.2rem;cursor:pointer;border-bottom:2px solid transparent;display:flex;align-items:center;white-space:nowrap;transition:color 180ms,border-color 180ms;}
+.nav-btn:hover{color:rgba(247,244,238,0.85);}
+.nav-btn.active{color:var(--cream);border-bottom-color:var(--gold-light);font-weight:500;}
+.header-meta{display:flex;align-items:center;padding:1rem 0 1rem 1.25rem;border-left:1px solid rgba(255,255,255,0.1);margin-left:auto;font-size:11px;color:rgba(247,244,238,0.55);white-space:nowrap;}
+.header-meta b{color:rgba(247,244,238,0.9);font-weight:500;display:block;}
+
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 2.5rem;display:flex;align-items:center;gap:.75rem;position:sticky;top:64px;z-index:99;box-shadow:var(--shadow);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.filter-bar::-webkit-scrollbar{display:none;}
+.filter-label{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--ink-light);font-weight:500;white-space:nowrap;flex-shrink:0;}
+.pill{flex-shrink:0;font-family:var(--sans);font-size:12px;background:none;border:1px solid rgba(26,25,22,0.2);border-radius:100px;padding:5px 14px;cursor:pointer;color:var(--ink-mid);transition:all 180ms;white-space:nowrap;}
+.pill:hover{border-color:var(--gold);color:var(--ink);}
+.pill.active{background:var(--ink);border-color:var(--ink);color:var(--cream);font-weight:500;}
+.filter-divider{width:1px;height:18px;background:var(--border);flex-shrink:0;}
+.filter-sel{font-family:var(--sans);font-size:12px;color:var(--ink);background:white;border:1px solid rgba(26,25,22,0.2);border-radius:100px;padding:5px 14px;cursor:pointer;outline:none;font-weight:300;flex-shrink:0;}
+.filter-sel:focus{border-color:var(--gold);}
+.filter-custom-label{font-size:11px;color:var(--ink-light);white-space:nowrap;flex-shrink:0;}
+.filter-badge{margin-left:auto;font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);padding:5px 14px;border-radius:100px;font-weight:500;white-space:nowrap;flex-shrink:0;}
+
+.main{max-width:1160px;margin:0 auto;padding:2.25rem 2.5rem 3rem;}
+.page{display:none;animation:fadeIn 200ms ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+.page-hero{margin-bottom:1.75rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border);}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.45rem;}
+.hero-eyebrow.teal{color:var(--teal);}
+.hero-eyebrow.coral{color:var(--coral);}
+.hero-title{font-family:var(--serif);font-size:38px;line-height:1.05;letter-spacing:-.01em;font-weight:400;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:13px;color:var(--ink-soft);margin-top:.55rem;}
+
+.alert-strip{border-radius:var(--radius);padding:12px 16px;margin-bottom:1.5rem;display:flex;gap:12px;font-size:13px;line-height:1.5;border:1px solid;}
+.alert-strip.danger{background:#FBF0EE;border-color:var(--coral);color:#6E2216;}
+.alert-strip.info{background:#EBF3F2;border-color:var(--teal);color:#174340;}
+.alert-icon{flex-shrink:0;font-size:14px;margin-top:1px;}
+.alert-body strong{font-weight:500;display:block;margin-bottom:2px;}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.75rem;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;box-shadow:var(--shadow);}
+.kpi-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-light);font-weight:500;margin-bottom:.4rem;}
+.kpi-value{font-family:var(--serif);font-size:26px;color:var(--ink);line-height:1;letter-spacing:-.01em;}
+.kpi-sub{font-size:11px;color:var(--ink-soft);margin-top:.35rem;}
+.kpi-value.gold{color:var(--gold);}.kpi-value.coral{color:var(--coral);}.kpi-value.teal{color:var(--teal);}
+
+.section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.65rem;box-shadow:var(--shadow);margin-bottom:1.5rem;}
+.section-head{margin-bottom:1rem;}
+.section-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-light);font-weight:500;}
+.section-title{font-family:var(--serif);font-size:20px;letter-spacing:-.005em;line-height:1.1;margin-top:.2rem;font-weight:400;}
+.section-sub{font-size:12px;color:var(--ink-soft);margin-top:.3rem;}
+
+.legend{display:flex;gap:1rem;font-size:12px;color:var(--ink-soft);margin-bottom:.65rem;flex-wrap:wrap;}
+.legend span{display:flex;align-items:center;gap:6px;}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+.chart-wrap{height:300px;min-height:300px;position:relative;overflow:hidden;} .chart-wrap>div{width:100%;height:100%;}
+.svg-tip{
+  position:fixed;pointer-events:none;z-index:999;
+  background:white;border:1px solid rgba(26,25,22,0.14);
+  border-radius:8px;padding:9px 13px;
+  box-shadow:0 4px 16px rgba(26,25,22,0.13);
+  font-family:'DM Sans',system-ui,sans-serif;font-size:12px;
+  color:#1A1916;min-width:120px;max-width:220px;
+  display:none;line-height:1.55;
+}
+.svg-tip-title{font-weight:500;font-size:12px;color:#6B675E;margin-bottom:4px;border-bottom:1px solid rgba(26,25,22,0.08);padding-bottom:4px;}
+.svg-tip-row{display:flex;align-items:center;gap:7px;margin-top:3px;}
+.svg-tip-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.svg-tip-label{flex:1;color:#4A4740;}
+.svg-tip-val{font-weight:500;color:#1A1916;font-variant-numeric:tabular-nums;}
+.chart-wrap.tall{height:340px;min-height:340px;}
+
+.prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+.prop-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow 180ms,transform 180ms;overflow:hidden;position:relative;}
+.prop-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.prop-card.gold::before{background:var(--gold);}
+.prop-card.teal::before{background:var(--teal);}
+.prop-card.coral::before{background:var(--coral);}
+.prop-card:hover{box-shadow:0 4px 18px rgba(26,25,22,0.11);transform:translateY(-2px);}
+.prop-card:active{transform:scale(0.98);}
+.prop-type{font-size:10px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem;}
+.prop-type.gold{color:var(--gold);}.prop-type.teal{color:var(--teal);}.prop-type.coral{color:var(--coral);}
+.prop-name{font-family:var(--serif);font-size:22px;line-height:1;font-weight:400;}
+.prop-loc{font-size:11px;color:var(--ink-soft);margin-top:3px;}
+.prop-total{font-family:var(--serif);font-size:30px;margin-top:.75rem;}
+.prop-breakdown{font-size:11px;color:var(--ink-soft);margin-top:.3rem;}
+.prop-cta{font-size:11px;color:var(--ink-light);margin-top:.75rem;}
+.card-period-label{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:3px 10px;}
+
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;color:var(--ink-light);font-weight:500;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;padding:9px 12px;border-bottom:1px solid var(--border);}
+td{padding:9px 12px;border-bottom:1px solid var(--border-soft);color:var(--ink);}
+tr:last-child td{border-bottom:none;}
+.num{text-align:right;font-variant-numeric:tabular-nums;}
+.row-total td{font-weight:500;border-top:2px solid var(--gold);background:#FDFAF3;}
+.row-total td:first-child{font-family:var(--serif);font-size:14px;}
+.cat-pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:100px;font-weight:500;}
+.cat-pill.gold{background:#F3E8CA;color:#7A5C1A;border:1px solid var(--gold);}
+.cat-pill.teal{background:#DCEAE9;color:#1B4B49;border:1px solid var(--teal);}
+.cat-pill.coral{background:#F5E5E2;color:#8A3225;border:1px solid var(--coral);}
+.empty{font-size:13px;color:var(--ink-light);font-style:italic;padding:1.25rem 0;text-align:center;}
+
+.outlier-month{margin-bottom:1.5rem;}
+.outlier-month-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.6rem;}
+.outlier-month-label{font-family:var(--serif);font-size:17px;font-weight:400;}
+.outlier-month-total{font-size:11px;color:var(--ink-light);background:var(--cream);border:1px solid var(--border);padding:2px 9px;border-radius:100px;}
+.outlier-items{display:flex;flex-direction:column;gap:6px;}
+.outlier-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;border-radius:var(--radius);background:var(--cream);border:1px solid var(--border);}
+.oi-bar{width:3px;border-radius:2px;align-self:stretch;flex-shrink:0;min-height:20px;}
+.oi-body{flex:1;min-width:0;}
+.oi-vendor{font-size:13px;font-weight:500;}
+.oi-desc{font-size:12px;color:var(--ink-soft);margin-top:2px;line-height:1.4;}
+.oi-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.oi-amount{font-family:var(--serif);font-size:17px;}
+
+.land-contract{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;}
+.land-contract-head{background:var(--cream);padding:10px 14px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-light);font-weight:500;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.land-contract-head strong{font-family:var(--serif);font-size:16px;color:var(--ink);text-transform:none;letter-spacing:0;}
+.land-contract table{font-size:12.5px;}
+.land-contract td{padding:7px 14px;}
+.land-indent{padding-left:28px!important;color:var(--ink-soft);}
+.land-note{background:#FDFAF3;border-top:1px solid var(--border);padding:10px 14px;font-size:12px;color:var(--ink-soft);}
+.early-row td{background:#FDFAF3;color:#7A5C1A;font-size:12px;}
+.tm-badge,.ex-badge{font-size:10px;border-radius:100px;padding:1px 7px;margin-left:6px;}
+.tm-badge{background:#DCEAE9;color:#1B4B49;border:1px solid var(--teal);}
+.ex-badge{background:#F3E8CA;color:#7A5C1A;border:1px solid var(--gold);}
+
+.note{font-size:11.5px;color:var(--ink-light);font-style:italic;margin-top:.65rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+.two-col>.section{margin-bottom:0;}
+
+.site-footer{background:var(--ink);color:rgba(247,244,238,0.5);padding:1.15rem 2.5rem;font-size:11px;display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;}
+.footer-brand{font-family:var(--serif);font-size:13px;color:rgba(247,244,238,0.8);font-weight:400;}
+
+@media(max-width:860px){.kpi-row{grid-template-columns:repeat(2,1fr);}.prop-grid{grid-template-columns:1fr 1fr;}.two-col{grid-template-columns:1fr;}}
+@media(max-width:640px){.site-header,.filter-bar,.main,.site-footer{padding-left:1.25rem;padding-right:1.25rem;}.hero-title{font-size:28px;}.kpi-row,.prop-grid{grid-template-columns:1fr;}.chart-wrap{height:240px;}.header-meta{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="svg-tip" id="svgTip"></div>
+<header class="site-header">
+  <div class="header-brand">
+    <div class="brand-eyebrow">Holt Lunsford Holdings</div>
+    <div class="brand-name">Property Dashboard</div>
+  </div>
+  <nav class="header-nav">
+    <button class="nav-btn active" onclick="showPage('summary',this)">Summary</button>
+    <button class="nav-btn" onclick="showPage('meadowood',this)">Meadowood</button>
+    <button class="nav-btn" onclick="showPage('strawberry',this)">Strawberry Park</button>
+    <button class="nav-btn" onclick="showPage('lasventanas',this)">Las Ventanas</button>
+  </nav>
+  <div class="header-meta">Last updated<b>Apr 21, 2026</b></div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Period</span>
+  <button class="pill active" onclick="setPeriod('ytd26',this)">2026 YTD</button>
+  <button class="pill" onclick="setPeriod('fy2025',this)">FY 2025</button>
+  <div class="filter-divider"></div>
+  <span class="filter-custom-label">Month:</span>
+  <select class="filter-sel" id="monthPicker" onchange="setMonth(this)">
+    <option value="">— select —</option>
+    <option value="0">Jan 2025</option><option value="1">Feb 2025</option><option value="2">Mar 2025</option>
+    <option value="3">Apr 2025</option><option value="4">May 2025</option><option value="5">Jun 2025</option>
+    <option value="6">Jul 2025</option><option value="7">Aug 2025</option><option value="8">Sep 2025</option>
+    <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
+    <option value="12">Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
+    <option value="15">Apr 2026</option>
+  </select>
+  <div class="filter-divider"></div>
+  <span class="filter-custom-label">Range:</span>
+  <select class="filter-sel" id="rangeStart" onchange="setRange()">
+    <option value="0">Jan 2025</option><option value="1">Feb 2025</option><option value="2">Mar 2025</option>
+    <option value="3">Apr 2025</option><option value="4">May 2025</option><option value="5">Jun 2025</option>
+    <option value="6">Jul 2025</option><option value="7">Aug 2025</option><option value="8">Sep 2025</option>
+    <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
+    <option value="12" selected>Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
+    <option value="15">Apr 2026</option>
+  </select>
+  <span class="filter-custom-label">to</span>
+  <select class="filter-sel" id="rangeEnd" onchange="setRange()">
+    <option value="0">Jan 2025</option><option value="1">Feb 2025</option><option value="2">Mar 2025</option>
+    <option value="3">Apr 2025</option><option value="4">May 2025</option><option value="5">Jun 2025</option>
+    <option value="6">Jul 2025</option><option value="7">Aug 2025</option><option value="8">Sep 2025</option>
+    <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
+    <option value="12">Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
+    <option value="15" selected>Apr 2026</option>
+  </select>
+  <span class="filter-badge" id="filterBadge">2026 YTD · Jan – Apr</span>
+</div>
+
+<main class="main">
+
+<!-- ════ SUMMARY ════ -->
+<div id="page-summary" class="page active">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Portfolio Summary</div>
+    <div class="hero-title">Three Properties, <em>One View.</em></div>
+    <div class="hero-sub">Meadowood · Dallas, TX &nbsp;·&nbsp; Strawberry Park · Beaver Creek, CO &nbsp;·&nbsp; Las Ventanas · Cabo San Lucas, MX</div>
+    <div style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:5px 14px;">
+      <span style="font-size:11px;color:#7A5C1A;letter-spacing:.12em;text-transform:uppercase;font-weight:500;">Showing</span>
+      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;font-weight:400;" id="periodLabel">2026 YTD · Jan – Apr</span>
+    </div>
+  </div>
+
+  <div id="alert-leak" class="alert-strip danger">
+    <span class="alert-icon">⚠</span>
+    <div class="alert-body">
+      <strong>Meadowood — water leak (Dec 2025 – Mar 2026 · ~$9,450 excess)</strong>
+      Dallas Water spiked from ~$200/mo to $827 (Dec) → $3,867 (Feb 26) → $5,990 (Mar 26). April 2026 normalized at $187. The cause is actively being investigated.
+    </div>
+  </div>
+
+  <div class="prop-grid">
+    <div class="prop-card gold" onclick="showPage('meadowood')">
+      <div class="prop-type gold">Primary Residence</div>
+      <div class="prop-name">Meadowood</div>
+      <div class="prop-loc">Dallas, TX · 4650 Meadowood Rd</div>
+      <div class="prop-total" id="pc-mw">—</div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-mw">2026 YTD · Jan – Apr</span></div>
+      <div class="prop-breakdown" id="pc-mw-sub">—</div>
+      <div class="prop-cta">Tap to explore →</div>
+    </div>
+    <div class="prop-card teal" onclick="showPage('strawberry')">
+      <div class="prop-type teal">Vacation Property</div>
+      <div class="prop-name">Strawberry Park</div>
+      <div class="prop-loc">Beaver Creek, CO · 801 Strawberry Park Rd</div>
+      <div class="prop-total" id="pc-sp">—</div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-sp">2026 YTD · Jan – Apr</span></div>
+      <div class="prop-breakdown" id="pc-sp-sub">—</div>
+      <div class="prop-cta">Tap to explore →</div>
+    </div>
+    <div class="prop-card coral" onclick="showPage('lasventanas')">
+      <div class="prop-type coral">Resort Villa</div>
+      <div class="prop-name">Las Ventanas</div>
+      <div class="prop-loc">Cabo San Lucas, MX · PH 5501</div>
+      <div class="prop-total" id="pc-lv">—</div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-lv">2026 YTD · Jan – Apr</span></div>
+      <div class="prop-breakdown" id="pc-lv-sub">—</div>
+      <div class="prop-cta">Tap to explore →</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Routine &amp; recurring monthly spend</div>
+      <div class="section-title">Cost by property — trailing 13 months</div>
+      <div class="section-sub">Apr 2025 – Apr 2026 · Stacked by property · All recurring expenses. Large one-time outliers excluded.</div>
+    </div>
+    <div class="legend">
+      <span><span class="leg-dot" style="background:#B08A2E"></span>Meadowood (top)</span>
+      <span><span class="leg-dot" style="background:#276663"></span>Strawberry Park</span>
+      <span><span class="leg-dot" style="background:#BE4432"></span>Las Ventanas (bottom)</span>
+    </div>
+    <div class="chart-wrap tall"><div id="routineChart"></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1rem;">
+      <div style="background:#FDFAF3;border:1px solid var(--gold);border-radius:8px;padding:10px 14px;">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7A5C1A;font-weight:500;margin-bottom:3px;">Meadowood avg/mo</div>
+        <div style="font-family:var(--serif);font-size:18px;color:#7A5C1A" id="sm-mw-avg">—</div>
+      </div>
+      <div style="background:#EBF3F2;border:1px solid var(--teal);border-radius:8px;padding:10px 14px;">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#1B4B49;font-weight:500;margin-bottom:3px;">Strawberry avg/mo</div>
+        <div style="font-family:var(--serif);font-size:18px;color:#1B4B49" id="sm-sp-avg">—</div>
+      </div>
+      <div style="background:#F5E5E2;border:1px solid var(--coral);border-radius:8px;padding:10px 14px;">
+        <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A3225;font-weight:500;margin-bottom:3px;">Las Ventanas avg/mo</div>
+        <div style="font-family:var(--serif);font-size:18px;color:#8A3225" id="sm-lv-avg">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Non-recurring outlier expenses</div>
+      <div class="section-title">One-time &amp; project spend — trailing 13 months</div>
+      <div class="section-sub">Apr 2025 – Apr 2026 · Stacked by property · $2,500+ threshold</div>
+    </div>
+    <div class="legend">
+      <span><span class="leg-dot" style="background:#B08A2E"></span>Meadowood (top)</span>
+      <span><span class="leg-dot" style="background:#276663"></span>Strawberry Park</span>
+      <span><span class="leg-dot" style="background:#BE4432"></span>Las Ventanas (bottom)</span>
+    </div>
+    <div class="chart-wrap tall"><div id="outlierChart"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Capital &amp; repairs log</div>
+      <div class="section-title">Outlier transaction detail — newest to oldest</div>
+      <div class="section-sub">One-off expenses $2,500+ · selected period</div>
+    </div>
+    <div id="outlierList"></div>
+  </div>
+</div>
+
+<!-- ════ MEADOWOOD ════ -->
+<div id="page-meadowood" class="page">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Primary Residence · Dallas, TX</div>
+    <div class="hero-title">Meadowood</div>
+    <div class="hero-sub">4650 Meadowood Rd · Dallas TX 75220 · Cirro Energy · Atmos Gas · Dallas Water · Richardson Landscape</div>
+  </div>
+  <div id="alert-mw" class="alert-strip danger">
+    <span class="alert-icon">⚠</span>
+    <div class="alert-body">
+      <strong>Water leak — Dec 2025 through Mar 2026 (~$9,450 excess)</strong>
+      Normal ~$200/mo. Dec $827 · Feb 26 $3,867 · Mar 26 $5,990. April 2026 normalized at $187. The cause is actively being investigated.
+    </div>
+  </div>
+  <div class="kpi-row" id="mw-kpis"></div>
+  <div class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Monthly spend</div>
+      <div class="section-title">Utilities by type</div>
+      <div class="section-sub">Electricity · Gas · Water · selected period</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem;flex-wrap:wrap;gap:8px;">
+      <div class="legend" style="margin-bottom:0">
+        <span><span class="leg-dot" style="background:#B08A2E"></span>Electricity</span>
+        <span><span class="leg-dot" style="background:#276663"></span>Gas</span>
+        <span><span class="leg-dot" style="background:#4A8A30"></span>Water</span>
+      </div>
+      <select id="mwViewSel" onchange="mwView=this.value;buildMWChart()" style="font-family:var(--sans);font-size:12px;border:1px solid rgba(26,25,22,0.2);border-radius:100px;padding:4px 12px;background:white;cursor:pointer;outline:none;">
+        <option value="all">All stacked</option>
+        <option value="elec">Electricity only</option>
+        <option value="gas">Gas only</option>
+        <option value="water">Water only</option>
+      </select>
+    </div>
+    <div class="chart-wrap tall"><div id="mwChart"></div></div>
+  </div>
+  <div class="two-col">
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Electricity</div><div class="section-title">kWh consumption</div></div>
+      <div class="chart-wrap"><div id="mwKwhChart"></div></div>
+      <p class="note">Peak Aug 2025: 12,040 kWh ($1,367). Low Apr 2025: 6,640 kWh ($747). Rate ~$0.105–$0.114/kWh. Apr 2026: 6,920 kWh · $857.53.</p>
+    </div>
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
+      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="mwBreakout"></tbody></table>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="mwLedger"></tbody></table></div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Meadowood</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div id="mwOutlierList"></div>
+  </div>
+</div>
+
+<!-- ════ STRAWBERRY PARK ════ -->
+<div id="page-strawberry" class="page">
+  <div class="page-hero">
+    <div class="hero-eyebrow teal">Vacation Property · Beaver Creek, CO</div>
+    <div class="hero-title">Strawberry Park</div>
+    <div class="hero-sub">801 Strawberry Park Rd · Beaver Creek CO 81620 · Holy Cross Energy · Xcel Energy · Eagle River Water · Renova · Intermountain Landscaping</div>
+  </div>
+  <div class="alert-strip info">
+    <span class="alert-icon">ℹ</span>
+    <div class="alert-body">
+      <strong>New Holy Cross demand charges — effective Apr 1, 2026</strong>
+      Mar 2026 hit $1,012 (highest ever). Apr 2026 under new structure: $545 (5,000 kWh). Spread high-wattage appliance use throughout the day to reduce peak demand.
+    </div>
+  </div>
+  <div class="kpi-row kpi-row-5" id="sp-kpis" style="grid-template-columns:repeat(5,1fr)"></div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Monthly spend</div><div class="section-title">Utilities — seasonal pattern</div><div class="section-sub">Electricity · Gas · Water · selected period</div></div>
+    <div class="legend">
+      <span><span class="leg-dot" style="background:#378ADD"></span>Electricity</span>
+      <span><span class="leg-dot" style="background:#276663"></span>Gas</span>
+      <span><span class="leg-dot" style="background:#4A8A30"></span>Water</span>
+    </div>
+    <div class="chart-wrap tall"><div id="spChart"></div></div>
+  </div>
+  <div class="two-col">
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Gas — Xcel Energy</div><div class="section-title">2025 vs 2026 heating season</div></div>
+      <div class="chart-wrap"><div id="spGasChart"></div></div>
+      <p class="note">2026 winter warmer — heating demand down ~18%. Feb 2025 peak: $1,671 vs Feb 2026: $1,396.</p>
+    </div>
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
+      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="spBreakout"></tbody></table>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Mgmt</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="spLedger"></tbody></table></div>
+    <p class="note">Landscaping reflects actual contract payment dates: $11,850 May 15 · $11,850 Sep 1 · $4,366 extras Dec 2025 · $12,900 Apr 2026 (2026 installment #1).</p>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Intermountain Landscaping &amp; Maintenance</div><div class="section-title">Contract &amp; extras detail</div></div>
+    <div class="alert-strip info" style="margin-bottom:1.25rem">
+      <span class="alert-icon">▲</span>
+      <div class="alert-body"><strong>2026 contract up 8.9% ($25,800 vs $23,700)</strong> Flowers +$950 · Summer care +$725 · Spring +$215 · Fall +$210. Early-pay: $25,026 if paid by Apr 9, 2026.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div>
+        <div class="land-contract">
+          <div class="land-contract-head"><span>2025 Contract</span><strong>$23,700</strong></div>
+          <table><tr><td>Spring clean-ups</td><td class="num">$4,260</td></tr><tr><td>Summer care</td><td class="num">$7,300</td></tr><tr><td>Flowers</td><td class="num">$11,250</td></tr><tr><td>Fall services</td><td class="num">$890</td></tr><tr class="row-total"><td>Contract total</td><td class="num">$23,700</td></tr><tr class="early-row"><td>Early-pay (3%, by Apr 14)</td><td class="num">→ $22,989</td></tr></table>
+          <div class="land-note">Payments: $11,850 due May 15 · $11,850 due Sep 1</div>
+        </div>
+        <div class="land-contract">
+          <div class="land-contract-head"><span>2025 Extras — Inv. #801SP-2025-E1 <span class="ex-badge">T&amp;M</span></span><strong>$4,366</strong></div>
+          <table><tr><td>Irrigation start-up &amp; repairs (May–Jul)</td><td class="num">$1,540</td></tr><tr><td>Perennial plantings — hot tub garden &amp; driveway</td><td class="num">$1,364</td></tr><tr><td>Irrigation monitoring &amp; drip adjustments</td><td class="num">$396</td></tr><tr><td>Deer repellant, herbicide (Aug)</td><td class="num">$57</td></tr><tr><td>Skiway clearing — chainsaw &amp; brush (Oct)</td><td class="num">$314</td></tr><tr><td>Fall leaf clean-up (Oct)</td><td class="num">$996</td></tr><tr><td>Mulch, soil &amp; materials</td><td class="num">$211</td></tr><tr class="row-total"><td>Extras total · billed Dec 23, 2025</td><td class="num">$4,366</td></tr></table>
+          <div class="land-note">2025 Intermountain total: $23,700 + $4,366 = <strong>$28,066</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="land-contract">
+          <div class="land-contract-head"><span>2026 Contract</span><strong>$25,800</strong></div>
+          <table><tr><td>Spring clean-ups</td><td class="num">$4,475</td></tr><tr><td>Summer care</td><td class="num">$8,025</td></tr><tr><td>Flowers</td><td class="num">$12,200</td></tr><tr><td>Fall services</td><td class="num">$1,100</td></tr><tr class="row-total"><td>Contract total</td><td class="num">$25,800</td></tr><tr class="early-row"><td>Early-pay (3%, by Apr 9)</td><td class="num">→ $25,026</td></tr></table>
+          <div class="land-note">Payments: $12,900 due May 15 · $12,900 due Sep 1</div>
+        </div>
+        <div class="land-contract">
+          <div class="land-contract-head"><span>2026 Extras <span class="tm-badge">Pending — end of season</span></span><strong>TBD</strong></div>
+          <table><tr><td style="color:var(--ink-soft);font-style:italic" colspan="2">Budget ~$4,000–$5,000 based on 2025 actuals. 2026 T&amp;M rates increased. Invoice expected December 2026.</td></tr></table>
+          <div class="land-note">2026 est. total: $25,800 + ~$4,500 extras = <strong>~$30,300</strong></div>
+        </div>
+        <div class="section" style="margin-top:1rem">
+          <div class="section-head"><div class="section-eyebrow">Contract comparison</div><div class="section-title">2025 vs 2026 by category</div></div>
+          <div class="chart-wrap"><div id="spLandChart"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Strawberry Park</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div id="spOutlierList"></div>
+  </div>
+</div>
+
+<!-- ════ LAS VENTANAS ════ -->
+<div id="page-lasventanas" class="page">
+  <div class="page-hero">
+    <div class="hero-eyebrow coral">Resort Villa · Cabo San Lucas, MX</div>
+    <div class="hero-title">Las Ventanas</div>
+    <div class="hero-sub">Penthouse 5501 · Las Ventanas al Paraíso · Km 19.5, Carretera Transpeninsular · Rosewood HOA · CFE · Rosewood gas</div>
+  </div>
+  <div class="alert-strip info">
+    <span class="alert-icon">ℹ</span>
+    <div class="alert-body"><strong>HOA rate reduction — January 2025 saved $25,739 annually</strong> Dues dropped from $10,262.96 to $8,118.08/mo in Jan 2025 (−21%). Slight uptick to $8,126.36 from Jan 2026.</div>
+  </div>
+  <div class="kpi-row" id="lv-kpis"></div>
+  <div class="two-col">
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">HOA dues — Rosewood</div><div class="section-title">Full history</div></div>
+      <div class="chart-wrap"><div id="lvHoaChart"></div></div>
+      <p class="note">$10,263/mo Oct–Dec 2024 → $8,118/mo 2025 → $8,126/mo from Jan 2026.</p>
+    </div>
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Gas — Rosewood</div><div class="section-title">Occupancy-driven usage</div></div>
+      <div class="chart-wrap"><div id="lvGasChart"></div></div>
+      <p class="note">Zero months = unoccupied. Jan 2026 highest at $1,042 (11 occupied days).</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">CFE electricity</div><div class="section-title">Bimonthly bills — MXN → USD (~18:1)</div><div class="section-sub">DAC tariff (no subsidy) · billed bimonthly · selected range</div></div>
+    <div class="chart-wrap"><div id="lvElecChart"></div></div>
+    <p class="note">Summer peaks driven by Cabo A/C demand.</p>
+  </div>
+  <div class="two-col">
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">HOA</th><th class="num">Gas</th><th class="num">Elec. (est.)</th><th class="num">Total</th></tr></thead><tbody id="lvLedger"></tbody></table></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
+      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="lvBreakout"></tbody></table>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Las Ventanas</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div id="lvOutlierList"></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">Holt Lunsford Holdings — Property Dashboard</div>
+  <div>All amounts USD · CFE ~18 MXN/USD · Data through April 2026 · Confidential</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════
+// DATA — 16 months, idx 0 = Jan 2025 … idx 15 = Apr 2026
+// ═══════════════════════════════════════════════════
+const LABELS=['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26'];
+const M12=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// Utilities (from OneDrive statements)
+const MW_EL=[927,915,850,747,875,1017,1171,1367,1219,1125,815,836,840,827,765,858];
+const MW_GA=[681,934,695,320,268,230,199,204,222,215,302,439,816,1008,590,391];
+const MW_WA=[212,200,203,210,218,243,179,192,204,199,207,827,200,3867,5990,187];
+const MW_KW=[8040,7880,7400,6640,7680,8960,10280,12040,10240,9360,6840,6960,7120,6920,6400,6920];
+const SP_EL=[631,644,719,768,203,205,259,247,201,169,196,326,756,939,1012,545];
+const SP_GA=[1475,1671,1614,1096,384,108,54,117,86,101,152,601,856,1396,1182,490];
+const SP_WA=[351,300,280,265,300,310,320,295,280,290,300,320,310,295,280,270];
+const SP_LAND=[0,0,0,0,11850,0,0,0,11850,0,0,4366,0,0,0,12900];
+const LV_HO=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126,8126,8126,8126];
+const LV_GA=[581,606,0,385,165,364,0,82,0,274,239,851,1042,542,1,0];
+const LV_EL=[1130,1130,1080,1080,2220,2220,2030,2030,2100,2100,1050,1050,1890,1890,1060,1060];
+
+// Routine monthly totals (recurring only — Meadowood landscaping one-times excluded)
+const MW_ROUTINE=[16400,13702,7941,13435,18779,5846,16090,16019,18048,13953,7141,12929,18478,18768,17284,6951];
+const SP_ROUTINE=[5988,3966,5366,5396,2722,11543,4322,4876,3922,2538,3038,2538,7255,3438,4898,2270];
+const LV_ROUTINE=[9959,8422,8484,8118,12788,9577,8118,12758,19758,8118,8318,8918,10616,8525,8126,418];
+
+// Outliers ($2,500+ one-time items)
+const OUTLIERS={
+  0:[{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Protection + Cloth Installation',amt:3056},{prop:'MW',vendor:'Meadowood Estates HOA',desc:'Annual HOA Dues',amt:3000}],
+  1:[{prop:'MW',vendor:'Richardson Landscape',desc:'T-Post & Tree Wraps Installation',amt:10310},{prop:'MW',vendor:'Richardson Landscape',desc:'Transplant Medium-Sized Trees',amt:4527},{prop:'MW',vendor:'E2 Illumination Designs',desc:'Electrical Work',amt:3695}],
+  2:[{prop:'MW',vendor:'Richardson Landscape',desc:'192 Boxwood Wintergreen — plants + labor',amt:16419},{prop:'MW',vendor:'Premier Lighting',desc:'Attic Light, Dining Room, Switches',amt:12625},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Contract — Installment #1',amt:11850},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Zoysia Grass + Irrigation Repairs',amt:10212},{prop:'MW',vendor:'Reilly Homes',desc:'Windows, Painting, Re-Caulking, Labor',amt:7645},{prop:'MW',vendor:'Richardson Landscape',desc:'Fertilizer Combo Mix (200 gal tank)',amt:6820},{prop:'MW',vendor:'Richardson Landscape',desc:'Remove Mistletoe + Light Prune All Trees',amt:5304},{prop:'MW',vendor:'Richardson Landscape',desc:'Labor — Removing Excess Soil, Planting',amt:5196}],
+  3:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Upper Terrace Railing + Management Fees',amt:11717},{prop:'MW',vendor:'Apex Protection Services',desc:'Security System Installation',amt:8622},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Pool Repairs + Professional Cleaning',amt:4295}],
+  4:[{prop:'MW',vendor:'Harold Leidner Company',desc:'Autograph Foliages, Airspade Trees, Planting',amt:18013},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Contract — Installment #2',amt:11850},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Glass in Main Terrace + Supervision',amt:8193},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'New Network Install — 80% Deposit',amt:7289},{prop:'MW',vendor:'Richardson Landscape',desc:'Labor — Soil Removal, Planting Boxwoods',amt:5196},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Upper Terrace Railing — Remaining Balance',amt:4785},{prop:'MW',vendor:'Richardson Landscape',desc:'Labor — Bamboo, Fallen Tree, Stone',amt:3173},{prop:'MW',vendor:'Richardson Landscape',desc:'Labor — Fill Hole & Cover with Sod (67 hrs)',amt:2974}],
+  5:[{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Full Network Installation',amt:11481},{prop:'SP',vendor:'Holy Cross Custom Builders',desc:'Repairs to Frozen Drain Pipes',amt:4859},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Floor Sealing',amt:4771},{prop:'MW',vendor:'Premier Lighting',desc:'Landscape Lighting Repairs',amt:3616},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Network Services — Additional Work',amt:3177}],
+  6:[{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Network Services — Phase 2',amt:6215}],
+  7:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'AC Unit Repairs + Maintenance',amt:5381},{prop:'MW',vendor:'24 Hour LTD',desc:'Replacing Evaporator Coil — HVAC',amt:4139},{prop:'SP',vendor:'Cazares Plastering',desc:'Remove Caulk Around Windows',amt:2640}],
+  8:[{prop:'LV',vendor:'HUB International',desc:'Las Ventanas Annual Insurance Policy',amt:11490},{prop:'SP',vendor:'High Quality Masonry',desc:'Replace Stone Caps on Retaining Wall + Regrout',amt:3800},{prop:'SP',vendor:'Loff Roofing Services',desc:'Snow Stop Installation + Rehang Heat Tape',amt:2860},{prop:'MW',vendor:'Richardson Landscape',desc:'Repair Irrigation System',amt:2583}],
+  11:[{prop:'MW',vendor:'APS Building Services',desc:'Plumbing System Leak Repair',amt:5307},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Extras Invoice #801SP-2025-E1',amt:4366},{prop:'MW',vendor:'Meadowood Estates HOA',desc:'Annual HOA Dues',amt:3000}],
+  10:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Wooden Beams Replacement',amt:7082}],
+  12:[{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 7 Live Oaks + Labor + Sales Tax',amt:44022},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Pump',amt:10285},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets — First Payment',amt:6941},{prop:'SP',vendor:'Cazares Plastering',desc:'Bunk Bed Stain + Two Coats of Lacquer',amt:4220},{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Cloth Service + Labor',amt:2990}],
+  13:[{prop:'MW',vendor:'NTS Contractors',desc:'Concrete Work',amt:12774},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets — Second Payment + Floor Coating',amt:9378}],
+  14:[{prop:'MW',vendor:'Richardson Landscape',desc:'Irrigation Repairs, Maintenance + Cleanup',amt:4085}],
+  15:[{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #1',amt:12900}]
+};
+
+const PROP_COLOR={MW:'#B08A2E',SP:'#276663',LV:'#BE4432'};
+const PROP_NAME={MW:'Meadowood',SP:'Strawberry Park',LV:'Las Ventanas'};
+const PROP_ACCENT={MW:'gold',SP:'teal',LV:'coral'};
+
+// ═══ PRESETS ═══
+const PRESETS={
+  ytd26:{label:'2026 YTD · Jan – Apr',r:[12,15]},
+  fy2025:{label:'FY 2025 · Jan – Dec',r:[0,11]}
+};
+let CR=[12,15];
+let mwView='all';
+
+// ═══════════════════════════════════════════════════
+// SVG CHART ENGINE — no external libraries, works on all iOS browsers
+// ═══════════════════════════════════════════════════
+
+var CH = {}; // compatibility stub
+
+// ── Shared helpers (formerly alongside cOpts) ──
+var FONT = "'DM Sans',system-ui,sans-serif";
+
+// ── Core helpers ──
+function set(id, v) {
+  var e = document.getElementById(id);
+  if (e) e.textContent = v;
+}
+function sl(a) { return a.slice(CR[0], CR[1]+1).map(function(v){ return v===null?null:v; }); }
+function slL()  { return LABELS.slice(CR[0], CR[1]+1); }
+function sm(a)  { return (a||[]).reduce(function(t,v){ return t+(v||0); }, 0); }
+function ssm(a) { return sm(sl(a)); }
+function fmt(n) { return '$'+Math.round(n).toLocaleString(); }
+function pct(v,t){ return t>0 ? ((v/t)*100).toFixed(1)+'%' : '—'; }
+
+function outlierSum(prop) {
+  var t = 0;
+  for (var i = CR[0]; i <= CR[1]; i++) {
+    (OUTLIERS[i]||[]).forEach(function(x){ if(!prop||x.prop===prop) t+=x.amt; });
+  }
+  return t;
+}
+function outlierByMonth(prop) {
+  return slL().map(function(_,ri){
+    var i = CR[0]+ri;
+    return (OUTLIERS[i]||[]).filter(function(x){ return !prop||x.prop===prop; })
+                             .reduce(function(t,x){ return t+x.amt; }, 0);
+  });
+}
+
+// cOpts kept as no-op shim — SVG engine ignores it but some legacy call sites reference it
+function cOpts(stacked) { return {}; }
+
+function niceMax(v) {
+  if (v <= 0) return 10;
+  var mag = Math.pow(10, Math.floor(Math.log10(v)));
+  var frac = v / mag;
+  var nice;
+  if (frac <= 1) nice = 1 * mag;
+  else if (frac <= 2) nice = 2 * mag;
+  else if (frac <= 5) nice = 5 * mag;
+  else nice = 10 * mag;
+  return Math.ceil(v / nice) * nice || nice;
+}
+
+function fmtK(v) {
+  if (v === 0) return '$0';
+  if (v >= 1000000) return '$' + (v/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
+  return '$' + Math.round(v);
+}
+
+function svgBar(id, datasets, labels, opts) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  opts = opts || {};
+  var stacked = !!opts.stacked;
+  var W = el.clientWidth || (el.parentElement && el.parentElement.clientWidth) || 560;
+  var H = el.clientHeight || (el.parentElement && el.parentElement.clientHeight) || 300;
+  var PL = 58, PR = 12, PT = 12, PB = 54;
+  var cW = W - PL - PR, cH = H - PT - PB;
+  var n = labels.length;
+  if (n === 0) return;
+
+  var maxVal = 0;
+  for (var i = 0; i < n; i++) {
+    var tot = 0;
+    for (var d = 0; d < datasets.length; d++) tot += stacked ? (datasets[d].data[i] || 0) : 0;
+    if (!stacked) for (var d = 0; d < datasets.length; d++) { var v = datasets[d].data[i] || 0; if (v > maxVal) maxVal = v; }
+    if (stacked && tot > maxVal) maxVal = tot;
+  }
+  var MX = niceMax(maxVal || 1);
+  var STEPS = 5;
+
+  function yp(v) { return PT + cH * (1 - v / MX); }
+
+  var out = ['<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="display:block;overflow:visible;touch-action:pan-y;">'];
+
+  // grid + y-axis labels
+  for (var s = 0; s <= STEPS; s++) {
+    var yv = MX * s / STEPS;
+    var ypx = yp(yv);
+    out.push('<line x1="' + PL + '" y1="' + ypx.toFixed(1) + '" x2="' + (W-PR) + '" y2="' + ypx.toFixed(1) + '" stroke="rgba(26,25,22,0.07)" stroke-width="1"/>');
+    out.push('<text x="' + (PL-5) + '" y="' + (ypx+4).toFixed(1) + '" text-anchor="end" font-size="10" fill="#9A968C" font-family="DM Sans,system-ui,sans-serif">' + fmtK(yv) + '</text>');
+  }
+
+  var bGroupW = cW / n;
+  var bPad = bGroupW * 0.14;
+  var bW = bGroupW - bPad * 2;
+
+  // Store tooltip data per column
+  var tipData = [];
+
+  for (var i = 0; i < n; i++) {
+    var bx = PL + i * bGroupW + bPad;
+    if (stacked) {
+      var cumY = 0;
+      var tipRows = [];
+      for (var d = datasets.length - 1; d >= 0; d--) {
+        var v = datasets[d].data[i] || 0;
+        if (v <= 0) continue;
+        var bH = (v / MX) * cH;
+        var by = yp(cumY + v);
+        out.push('<rect x="' + bx.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + bW.toFixed(1) + '" height="' + bH.toFixed(1) + '" fill="' + datasets[d].color + '" rx="2"/>');
+        tipRows.unshift({label: datasets[d].label, color: datasets[d].color, value: v});
+        cumY += v;
+      }
+      tipData.push({label: labels[i], rows: tipRows, total: cumY, x: bx + bW/2, fullH: (cumY/MX)*cH});
+    } else {
+      var dsN = datasets.length;
+      var subW = bW / dsN;
+      var tipRows = [];
+      for (var d = 0; d < dsN; d++) {
+        var v = datasets[d].data[i] || 0;
+        if (v <= 0) continue;
+        var sx = bx + d * subW;
+        var bH = (v / MX) * cH;
+        var by = yp(v);
+        out.push('<rect x="' + sx.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + (subW-2).toFixed(1) + '" height="' + bH.toFixed(1) + '" fill="' + datasets[d].color + '" rx="2"/>');
+        tipRows.push({label: datasets[d].label, color: datasets[d].color, value: v});
+      }
+      var tot = tipRows.reduce(function(t,r){return t+r.value;},0);
+      tipData.push({label: labels[i], rows: tipRows, total: tot, x: bx + bW/2, fullH: (Math.max.apply(null,datasets.map(function(d){return d.data[i]||0;}))/MX)*cH});
+    }
+  }
+
+  // Invisible hover/touch rects over each column
+  for (var i = 0; i < n; i++) {
+    var td = tipData[i];
+    if (!td) continue;
+    var bx = PL + i * bGroupW;
+    var rowsJson = JSON.stringify(td.rows).replace(/"/g,'&quot;');
+    out.push('<rect x="' + bx.toFixed(1) + '" y="' + PT + '" width="' + bGroupW.toFixed(1) + '" height="' + cH + '" fill="transparent"' +
+      ' data-label="' + td.label + '"' +
+      ' data-total="' + Math.round(td.total) + '"' +
+      ' data-rows="' + rowsJson + '"' +
+      ' class="svg-hover-rect"' +
+      ' onmouseenter="svgTipShow(event,this)" onmouseleave="svgTipHide()"' +
+      ' ontouchstart="svgTipTouch(event,this)" ontouchend="svgTipHide()"' +
+      '/>');
+  }
+
+  // x labels
+  for (var i = 0; i < n; i++) {
+    var lx = (PL + i * bGroupW + bGroupW / 2).toFixed(1);
+    var ly = H - PB + 16;
+    out.push('<text x="' + lx + '" y="' + ly + '" text-anchor="end" font-size="10" fill="#9A968C" font-family="DM Sans,system-ui,sans-serif" transform="rotate(-40,' + lx + ',' + ly + ')">' + labels[i] + '</text>');
+  }
+
+  out.push('</svg>');
+  el.innerHTML = out.join('');
+}
+
+function svgLine(id, datasets, labels, opts) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  opts = opts || {};
+  var W = el.clientWidth || (el.parentElement && el.parentElement.clientWidth) || 560;
+  var H = el.clientHeight || (el.parentElement && el.parentElement.clientHeight) || 240;
+  var PL = 58, PR = 16, PT = 12, PB = 54;
+  var cW = W - PL - PR, cH = H - PT - PB;
+  var n = labels.length;
+
+  var maxVal = 0;
+  for (var d = 0; d < datasets.length; d++)
+    for (var i = 0; i < n; i++) { var v = datasets[d].data[i]; if (v != null && v > maxVal) maxVal = v; }
+  var MX = niceMax(maxVal || 1);
+  var STEPS = 5;
+
+  function xp(i) { return PL + (n > 1 ? (i / (n-1)) * cW : cW/2); }
+  function yp(v) { return PT + cH * (1 - v / MX); }
+  function yFmt(v) { return opts.yLabel ? opts.yLabel(v) : fmtK(v); }
+
+  var out = ['<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="display:block;overflow:visible">'];
+
+  for (var s = 0; s <= STEPS; s++) {
+    var yv = MX * s / STEPS;
+    var ypx = yp(yv);
+    out.push('<line x1="' + PL + '" y1="' + ypx.toFixed(1) + '" x2="' + (W-PR) + '" y2="' + ypx.toFixed(1) + '" stroke="rgba(26,25,22,0.07)" stroke-width="1"/>');
+    out.push('<text x="' + (PL-5) + '" y="' + (ypx+4).toFixed(1) + '" text-anchor="end" font-size="10" fill="#9A968C" font-family="DM Sans,system-ui,sans-serif">' + yFmt(yv) + '</text>');
+  }
+
+  for (var d = 0; d < datasets.length; d++) {
+    var ds = datasets[d];
+    var pathD = '', started = false;
+    for (var i = 0; i < n; i++) {
+      var v = ds.data[i];
+      if (v == null) { started = false; continue; }
+      var px = xp(i).toFixed(1), py = yp(v).toFixed(1);
+      pathD += (started ? 'L' : 'M') + px + ' ' + py + ' ';
+      started = true;
+    }
+    if (pathD) {
+      var dash = ds.dashed ? ' stroke-dasharray="6,3"' : '';
+      out.push('<path d="' + pathD.trim() + '" fill="none" stroke="' + ds.color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"' + dash + '/>');
+    }
+    for (var i = 0; i < n; i++) {
+      var v = ds.data[i];
+      if (v != null) out.push('<circle cx="' + xp(i).toFixed(1) + '" cy="' + yp(v).toFixed(1) + '" r="3" fill="' + ds.color + '"/>');
+    }
+  }
+
+  for (var i = 0; i < n; i++) {
+    var lx = xp(i).toFixed(1);
+    var ly = H - PB + 16;
+    out.push('<text x="' + lx + '" y="' + ly + '" text-anchor="end" font-size="10" fill="#9A968C" font-family="DM Sans,system-ui,sans-serif" transform="rotate(-40,' + lx + ',' + ly + ')">' + labels[i] + '</text>');
+  }
+
+  out.push('</svg>');
+  el.innerHTML = out.join('');
+}
+
+
+// ── Tooltip system — works on mouse and touch ──
+function svgTipShow(e, rect) {
+  var tip = document.getElementById('svgTip');
+  if (!tip) return;
+  var label = rect.getAttribute('data-label') || '';
+  var total = parseInt(rect.getAttribute('data-total') || '0', 10);
+  var rows = [];
+  try { rows = JSON.parse(rect.getAttribute('data-rows') || '[]'); } catch(err) {}
+
+  var html = '<div class="svg-tip-title">' + label + '</div>';
+  rows.forEach(function(r) {
+    if (!r.value || r.value <= 0) return;
+    html += '<div class="svg-tip-row">' +
+      '<span class="svg-tip-dot" style="background:' + r.color + '"></span>' +
+      '<span class="svg-tip-label">' + r.label + '</span>' +
+      '<span class="svg-tip-val">$' + Math.round(r.value).toLocaleString() + '</span>' +
+      '</div>';
+  });
+  if (rows.length > 1) {
+    html += '<div class="svg-tip-row" style="border-top:1px solid rgba(26,25,22,0.08);margin-top:4px;padding-top:4px;">' +
+      '<span class="svg-tip-label" style="font-weight:500">Total</span>' +
+      '<span class="svg-tip-val" style="font-weight:500">$' + total.toLocaleString() + '</span></div>';
+  }
+  tip.innerHTML = html;
+  tip.style.display = 'block';
+  svgTipPos(e.clientX, e.clientY);
+}
+
+function svgTipTouch(e, rect) {
+  e.preventDefault();
+  var touch = e.touches[0];
+  svgTipShow({clientX: touch.clientX, clientY: touch.clientY}, rect);
+  // Hide after 2.5s on touch
+  clearTimeout(svgTipTouch._t);
+  svgTipTouch._t = setTimeout(svgTipHide, 2500);
+}
+
+function svgTipHide() {
+  var tip = document.getElementById('svgTip');
+  if (tip) tip.style.display = 'none';
+}
+
+function svgTipPos(cx, cy) {
+  var tip = document.getElementById('svgTip');
+  if (!tip) return;
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var tw = tip.offsetWidth || 160, th = tip.offsetHeight || 80;
+  var x = cx + 14, y = cy - th / 2;
+  if (x + tw > vw - 8) x = cx - tw - 14;
+  if (y < 8) y = 8;
+  if (y + th > vh - 8) y = vh - th - 8;
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+}
+
+// Keep tooltip following mouse
+document.addEventListener('mousemove', function(e) {
+  var tip = document.getElementById('svgTip');
+  if (tip && tip.style.display === 'block') svgTipPos(e.clientX, e.clientY);
+});
+
+
+// mk() — translates Chart.js config objects to SVG charts
+function mk(id, cfg) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var labels = cfg.data.labels || [];
+  var rawDs = cfg.data.datasets || [];
+  var stacked = !!(cfg.options && cfg.options.scales && cfg.options.scales.x && cfg.options.scales.x.stacked);
+
+  if (cfg.type === 'line') {
+    var ds = rawDs.map(function(d) {
+      return {label: d.label || '', data: d.data || [], color: d.borderColor || '#888', dashed: !!(d.borderDash && d.borderDash.length)};
+    });
+    var yLab = null;
+    try { yLab = cfg.options.scales.y.ticks.callback; } catch(e) {}
+    svgLine(id, ds, labels, {yLabel: yLab});
+  } else {
+    var ds = rawDs.map(function(d) {
+      var col = d.backgroundColor;
+      if (Array.isArray(col)) col = col[0] || '#888';
+      if (typeof col !== 'string') col = '#888';
+      return {label: d.label || '', data: d.data || [], color: col};
+    });
+    svgBar(id, ds, labels, {stacked: stacked});
+  }
+}
+
+
+// ═══ NAVIGATION ═══
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const b=btn||document.querySelectorAll('.nav-btn')[{summary:0,meadowood:1,strawberry:2,lasventanas:3}[id]];
+  if(b){b.classList.add('active');b.scrollIntoView&&b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});}
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderAll();
+}
+
+// ═══ PERIOD CONTROL ═══
+function setPeriod(k,btn){
+  document.querySelectorAll('.filter-bar .pill').forEach(p=>p.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('monthPicker').value='';
+  document.getElementById('rangeStart').value=PRESETS[k].r[0];
+  document.getElementById('rangeEnd').value=PRESETS[k].r[1];
+  CR=PRESETS[k].r.slice();
+  set('filterBadge',PRESETS[k].label);
+  set('periodLabel',PRESETS[k].label);
+  set('card-period-mw',PRESETS[k].label);
+  set('card-period-sp',PRESETS[k].label);
+  set('card-period-lv',PRESETS[k].label);
+  renderAll();
+}
+function setMonth(sel){
+  if(!sel.value)return;
+  document.querySelectorAll('.filter-bar .pill').forEach(p=>p.classList.remove('active'));
+  const i=parseInt(sel.value);
+  CR=[i,i];
+  document.getElementById('rangeStart').value=i;
+  document.getElementById('rangeEnd').value=i;
+  set('filterBadge',LABELS[i]);
+  set('periodLabel',LABELS[i]);
+  set('card-period-mw',LABELS[i]);
+  set('card-period-sp',LABELS[i]);
+  set('card-period-lv',LABELS[i]);
+  renderAll();
+}
+function setRange(){
+  document.querySelectorAll('.filter-bar .pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('monthPicker').value='';
+  let s=parseInt(document.getElementById('rangeStart').value);
+  let e=parseInt(document.getElementById('rangeEnd').value);
+  if(e<s){e=s;document.getElementById('rangeEnd').value=s;}
+  CR=[s,e];
+  const label=s===e?LABELS[s]:LABELS[s]+' – '+LABELS[e];
+  set('filterBadge',label);
+  set('periodLabel',label);
+  set('card-period-mw',label);
+  set('card-period-sp',label);
+  set('card-period-lv',label);
+  renderAll();
+}
+
+// ═══ ALERTS ═══
+function updateAlerts(){
+  const show=CR[0]<=14&&CR[1]>=11;
+  ['alert-leak','alert-mw'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display=show?'flex':'none';});
+}
+
+// ═══ OUTLIER LIST ═══
+function buildOutlierList(containerId,prop){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  const months=[];
+  for(let i=CR[1];i>=CR[0];i--){
+    const items=(OUTLIERS[i]||[]).filter(x=>!prop||x.prop===prop).slice().sort((a,b)=>b.amt-a.amt);
+    if(items.length)months.push({label:LABELS[i],items,total:items.reduce((t,x)=>t+x.amt,0)});
+  }
+  if(!months.length){el.innerHTML='<div class="empty">No outlier expenses in selected period.</div>';return;}
+  el.innerHTML=months.map(m=>`
+    <div class="outlier-month">
+      <div class="outlier-month-head">
+        <span class="outlier-month-label">${m.label}</span>
+        <span class="outlier-month-total">${fmt(m.total)}</span>
+      </div>
+      <div class="outlier-items">${m.items.map(it=>`
+        <div class="outlier-item">
+          <div class="oi-bar" style="background:${PROP_COLOR[it.prop]}"></div>
+          <div class="oi-body"><div class="oi-vendor">${it.vendor}</div><div class="oi-desc">${it.desc}</div></div>
+          <div class="oi-right">
+            <div class="oi-amount">${fmt(it.amt)}</div>
+            <span class="cat-pill ${PROP_ACCENT[it.prop]}">${PROP_NAME[it.prop]}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// ═══ SUMMARY ═══
+
+// T13M window: Apr 2025 (idx 3) through Apr 2026 (idx 15) — fixed, never changes
+const T_S=3, T_E=15, T_N=13;
+
+function buildSummaryCharts(){
+  const tL=LABELS.slice(T_S,T_E+1);
+  const tsl=a=>a.slice(T_S,T_E+1).map(v=>v===null?0:v);
+  const tOl=p=>Array.from({length:T_N},(_,ri)=>{
+    const i=T_S+ri;
+    return(OUTLIERS[i]||[]).filter(x=>x.prop===p).reduce((t,x)=>t+x.amt,0);
+  });
+  const sOpts={
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,titleFont:{family:FONT,size:12,weight:'500'},bodyFont:{family:FONT,size:12},callbacks:{label:c=>c.parsed.y>0?' '+c.dataset.label+': $'+Math.round(c.parsed.y).toLocaleString():null}}},
+    scales:{
+      x:{stacked:true,grid:{display:false},ticks:{color:'#9A968C',font:{family:FONT,size:11},maxRotation:45}},
+      y:{stacked:true,grid:{color:'rgba(26,25,22,0.06)'},ticks:{color:'#9A968C',font:{family:FONT,size:11},callback:v=>v>=1000?'$'+(v/1000).toFixed(v>=100000?0:1)+'K':'$'+v}}
+    }
+  };
+  mk('routineChart',{type:'bar',data:{labels:tL,datasets:[
+    {label:'Las Ventanas',data:tsl(LV_ROUTINE),backgroundColor:'#BE4432',stack:'s'},
+    {label:'Strawberry Park',data:tsl(SP_ROUTINE),backgroundColor:'#276663',stack:'s'},
+    {label:'Meadowood',data:tsl(MW_ROUTINE),backgroundColor:'#B08A2E',stack:'s'}
+  ]},options:sOpts});
+  mk('outlierChart',{type:'bar',data:{labels:tL,datasets:[
+    {label:'Las Ventanas',data:tOl('LV'),backgroundColor:'#BE4432',stack:'s'},
+    {label:'Strawberry Park',data:tOl('SP'),backgroundColor:'#276663',stack:'s'},
+    {label:'Meadowood',data:tOl('MW'),backgroundColor:'#B08A2E',stack:'s'}
+  ]},options:sOpts});
+}
+
+// Called on every filter change — only updates cards, KPIs, and outlier list; charts stay fixed
+function renderSummary(){
+  const n=Math.max(1,CR[1]-CR[0]+1);
+  const mwR=ssm(MW_ROUTINE),spR=ssm(SP_ROUTINE),lvR=ssm(LV_ROUTINE);
+  const mwO=outlierSum('MW'),spO=outlierSum('SP'),lvO=outlierSum('LV');
+
+  set('pc-mw',fmtK(mwR+mwO));
+  set('pc-mw-sub','Routine '+fmtK(mwR)+' + outliers '+fmtK(mwO));
+  set('pc-sp',fmtK(spR+spO));
+  set('pc-sp-sub','Routine '+fmtK(spR)+' + outliers '+fmtK(spO));
+  set('pc-lv',fmtK(lvR+lvO));
+  set('pc-lv-sub','Routine '+fmtK(lvR)+' + outliers '+fmtK(lvO));
+  // Averages always reflect the fixed T13M window (Apr 2025 – Apr 2026), not the filter
+  const t13mwR=MW_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
+  const t13spR=SP_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
+  const t13lvR=LV_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
+  set('sm-mw-avg',fmt(t13mwR/T_N)+'/mo');
+  set('sm-sp-avg',fmt(t13spR/T_N)+'/mo');
+  set('sm-lv-avg',fmt(t13lvR/T_N)+'/mo');
+
+  buildOutlierList('outlierList',null);
+}
+
+// ═══ MEADOWOOD ═══
+function renderMW(){
+  const n=Math.max(1,CR[1]-CR[0]+1);
+  const totO=outlierSum('MW');
+  document.getElementById('mw-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Electricity (Cirro)</div><div class="kpi-value">${fmtK(ssm(MW_EL))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_EL)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Gas (Atmos)</div><div class="kpi-value">${fmtK(ssm(MW_GA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_GA)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Water (Dallas Water)</div><div class="kpi-value gold">${fmtK(ssm(MW_WA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_WA)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Landscaping (Richardson)</div><div class="kpi-value">${fmtK(n*6278.5)}</div><div class="kpi-sub">$6,278.50/mo fixed</div></div>`;
+  buildMWChart();
+  mk('mwKwhChart',{type:'line',data:{labels:slL(),datasets:[{label:'kWh',data:sl(MW_KW),borderColor:'#B08A2E',backgroundColor:'rgba(176,138,46,0.07)',fill:true,tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,titleFont:{family:FONT,size:12,weight:'500'},bodyFont:{family:FONT,size:12}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#9A968C',font:{family:FONT,size:11},maxRotation:45}},y:{grid:{color:'rgba(26,25,22,0.06)'},ticks:{color:'#9A968C',font:{family:FONT,size:11},callback:v=>Math.round(v).toLocaleString()+' kWh'}}}}});
+  const rows=[{n:'Electricity',v:ssm(MW_EL)},{n:'Gas',v:ssm(MW_GA)},{n:'Water',v:ssm(MW_WA)},{n:'Landscaping (monthly fee)',v:n*6278.5},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
+  const grand=rows.reduce((t,r)=>t+r.v,0);
+  document.getElementById('mwBreakout').innerHTML=rows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,grand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(grand)}</td><td class="num">100%</td></tr>`;
+  const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tL=0;
+  for(let i=s;i<=e;i++){const el=MW_EL[i]||0,ga=MW_GA[i]||0,wa=MW_WA[i]||0,la=6278.5;tE+=el;tG+=ga;tW+=wa;tL+=la;
+    lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ga)}</td><td class="num">${fmt(wa)}</td><td class="num">${fmt(la)}</td><td class="num">${fmt(el+ga+wa+la)}</td></tr>`;}
+  lh+=`<tr class="row-total"><td>Total</td><td class="num">${fmt(tE)}</td><td class="num">${fmt(tG)}</td><td class="num">${fmt(tW)}</td><td class="num">${fmt(tL)}</td><td class="num">${fmt(tE+tG+tW+tL)}</td></tr>`;
+  document.getElementById('mwLedger').innerHTML=lh;
+  buildOutlierList('mwOutlierList','MW');
+}
+function buildMWChart(){
+  const lb=slL(),ds=[],st=mwView==='all';
+  if(mwView==='all'||mwView==='elec')ds.push({label:'Electricity',data:sl(MW_EL),backgroundColor:'#B08A2E'});
+  if(mwView==='all'||mwView==='gas')ds.push({label:'Gas',data:sl(MW_GA),backgroundColor:'#276663'});
+  if(mwView==='all'||mwView==='water')ds.push({label:'Water',data:sl(MW_WA),backgroundColor:'#4A8A30'});
+  mk('mwChart',{type:'bar',data:{labels:lb,datasets:ds},options:cOpts(st)});
+}
+
+// ═══ STRAWBERRY PARK ═══
+function renderSP(){
+  const n=Math.max(1,CR[1]-CR[0]+1);
+  const totO=outlierSum('SP');
+  document.getElementById('sp-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">Electricity (Holy Cross)</div><div class="kpi-value">${fmtK(ssm(SP_EL))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(SP_EL)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Gas (Xcel Energy)</div><div class="kpi-value">${fmtK(ssm(SP_GA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(SP_GA)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Water (Eagle River)</div><div class="kpi-value">${fmtK(ssm(SP_WA))}</div><div class="kpi-sub">Period total</div></div>
+    <div class="kpi"><div class="kpi-label">Prop. Mgmt (Renova)</div><div class="kpi-value">${fmtK(n*500)}</div><div class="kpi-sub">$500/mo fixed</div></div>
+    <div class="kpi"><div class="kpi-label">Landscaping (Intermountain)</div><div class="kpi-value teal">${fmtK(ssm(SP_LAND))}</div><div class="kpi-sub">Actual payments</div></div>`;
+  mk('spChart',{type:'bar',data:{labels:slL(),datasets:[{label:'Electricity',data:sl(SP_EL),backgroundColor:'#378ADD'},{label:'Gas',data:sl(SP_GA),backgroundColor:'#276663'},{label:'Water',data:sl(SP_WA),backgroundColor:'#4A8A30'}]},options:cOpts(true)});
+  mk('spGasChart',{type:'line',data:{labels:M12,datasets:[
+    {label:'2025',data:[1475,1671,1614,1096,384,108,54,117,86,101,152,601],borderColor:'#276663',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#276663',borderWidth:2},
+    {label:'2026',data:[856,1396,1182,490,null,null,null,null,null,null,null,null],borderColor:'#B08A2E',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2,borderDash:[5,3]}
+  ]},options:cOpts(false)});
+  const rows=[{n:'Electricity',v:ssm(SP_EL)},{n:'Gas',v:ssm(SP_GA)},{n:'Water',v:ssm(SP_WA)},{n:'Property mgmt',v:n*500},{n:'Landscaping',v:ssm(SP_LAND)},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
+  const grand=rows.reduce((t,r)=>t+r.v,0);
+  document.getElementById('spBreakout').innerHTML=rows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,grand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(grand)}</td><td class="num">100%</td></tr>`;
+  const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tM=0,tL=0;
+  for(let i=s;i<=e;i++){const el=SP_EL[i]||0,ga=SP_GA[i]||0,wa=SP_WA[i]||0,mg=500,la=SP_LAND[i]||0;tE+=el;tG+=ga;tW+=wa;tM+=mg;tL+=la;
+    let note='';if(la===11850)note=' <span style="font-size:10px;color:#9A968C">(contract pmt)</span>';else if(la===4366)note=' <span style="font-size:10px;color:#9A968C">(extras)</span>';else if(la===12900)note=' <span style="font-size:10px;color:#9A968C">(2026 #1)</span>';
+    lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ga)}</td><td class="num">${fmt(wa)}</td><td class="num">${fmt(mg)}</td><td class="num">${la>0?fmt(la)+note:'—'}</td><td class="num">${fmt(el+ga+wa+mg+la)}</td></tr>`;}
+  lh+=`<tr class="row-total"><td>Total</td><td class="num">${fmt(tE)}</td><td class="num">${fmt(tG)}</td><td class="num">${fmt(tW)}</td><td class="num">${fmt(tM)}</td><td class="num">${fmt(tL)}</td><td class="num">${fmt(tE+tG+tW+tM+tL)}</td></tr>`;
+  document.getElementById('spLedger').innerHTML=lh;
+  mk('spLandChart',{type:'bar',data:{labels:['Spring','Summer care','Flowers','Fall'],datasets:[
+    {label:'2025 — $23,700',data:[4260,7300,11250,890],backgroundColor:'rgba(39,102,99,0.4)'},
+    {label:'2026 — $25,800',data:[4475,8025,12200,1100],backgroundColor:'#276663'}
+  ]},options:cOpts(false)});
+  buildOutlierList('spOutlierList','SP');
+}
+
+// ═══ LAS VENTANAS ═══
+function renderLV(){
+  const n=Math.max(1,CR[1]-CR[0]+1);
+  const totO=outlierSum('LV');
+  document.getElementById('lv-kpis').innerHTML=`
+    <div class="kpi"><div class="kpi-label">HOA dues (Rosewood)</div><div class="kpi-value">${fmtK(ssm(LV_HO))}</div><div class="kpi-sub">Period total</div></div>
+    <div class="kpi"><div class="kpi-label">Electricity (CFE est.)</div><div class="kpi-value">${fmtK(ssm(LV_EL))}</div><div class="kpi-sub">MXN → USD ~18:1</div></div>
+    <div class="kpi"><div class="kpi-label">Gas (Rosewood)</div><div class="kpi-value">${fmtK(ssm(LV_GA))}</div><div class="kpi-sub">Occupancy-driven</div></div>
+    <div class="kpi"><div class="kpi-value teal">$25,739</div><div class="kpi-sub" style="margin-top:4px">Annual savings vs 2024 HOA rate</div></div>`;
+  const hd=['Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'];
+  const ha=[10263,10263,10263,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126,8126,8126];
+  mk('lvHoaChart',{type:'bar',data:{labels:hd,datasets:[{label:'HOA',data:ha,backgroundColor:ha.map(v=>v>9000?'#BE4432':'#B08A2E')}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,callbacks:{label:c=>' $'+Math.round(c.parsed.y).toLocaleString()}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#9A968C',font:{family:FONT,size:10},maxRotation:45}},y:{min:7000,grid:{color:'rgba(26,25,22,0.06)'},ticks:{color:'#9A968C',font:{family:FONT,size:11},callback:v=>'$'+(v/1000).toFixed(1)+'K'}}}}});
+  const gd=['Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26'];
+  const ga=[468,29,227,396,581,606,0,385,165,364,0,82,0,274,239,851,1042,542,1];
+  mk('lvGasChart',{type:'bar',data:{labels:gd,datasets:[{label:'Gas',data:ga,backgroundColor:ga.map(v=>v>800?'#BE4432':v>0?'#276663':'rgba(39,102,99,0.18)')}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,callbacks:{label:c=>' $'+Math.round(c.parsed.y).toLocaleString()}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#9A968C',font:{family:FONT,size:10},maxRotation:45}},y:{grid:{color:'rgba(26,25,22,0.06)'},ticks:{color:'#9A968C',font:{family:FONT,size:11},callback:v=>'$'+v.toLocaleString()}}}}});
+  const allCFE=[
+    {p:'Sep–Nov 24',v:Math.round(48006/18),s:-2,e:-1},{p:'Nov 24–Jan 25',v:Math.round(21441/18),s:-1,e:0},
+    {p:'Jan–Mar 25',v:Math.round(20354/18),s:0,e:2},{p:'Mar–May 25',v:Math.round(19463/18),s:2,e:4},
+    {p:'May–Jul 25',v:Math.round(39921/18),s:4,e:6},{p:'Jul–Sep 25',v:Math.round(36547/18),s:6,e:8},
+    {p:'Sep–Nov 25',v:Math.round(37844/18),s:8,e:10},{p:'Nov 25–Jan 26',v:Math.round(33998/18),s:10,e:12},
+    {p:'Jan–Mar 26',v:Math.round(19116/18),s:12,e:14}
+  ];
+  const filtCFE=allCFE.filter(x=>x.e>=CR[0]&&x.s<=CR[1]);
+  const cfeLb=filtCFE.length?filtCFE.map(x=>x.p):['No data'];
+  const cfeV=filtCFE.length?filtCFE.map(x=>x.v):[0];
+  mk('lvElecChart',{type:'bar',data:{labels:cfeLb,datasets:[{label:'Electricity (USD)',data:cfeV,backgroundColor:cfeV.map(v=>v>2000?'#BE4432':v>1500?'#B08A2E':'#276663')}]},options:cOpts(false)});
+  const[s,e]=CR;let lh='',tH=0,tG2=0,tE=0;
+  for(let i=s;i<=e;i++){const ho=LV_HO[i]||0,gas=LV_GA[i]||0,el=LV_EL[i]||0;tH+=ho;tG2+=gas;tE+=el;
+    lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(ho)}</td><td class="num">${gas>0?fmt(gas):'—'}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ho+gas+el)}</td></tr>`;}
+  lh+=`<tr class="row-total"><td>Total</td><td class="num">${fmt(tH)}</td><td class="num">${fmt(tG2)}</td><td class="num">${fmt(tE)}</td><td class="num">${fmt(tH+tG2+tE)}</td></tr>`;
+  document.getElementById('lvLedger').innerHTML=lh;
+  const lvRows=[{n:'HOA dues',v:ssm(LV_HO)},{n:'Electricity (CFE)',v:ssm(LV_EL)},{n:'Gas',v:ssm(LV_GA)},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
+  const lvGrand=lvRows.reduce((t,r)=>t+r.v,0);
+  document.getElementById('lvBreakout').innerHTML=lvRows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,lvGrand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(lvGrand)}</td><td class="num">100%</td></tr>`;
+  buildOutlierList('lvOutlierList','LV');
+}
+
+// ═══ RENDER ALL ═══
+function renderAll(){
+  updateAlerts();
+  var activePage=document.querySelector('.page.active');
+  var active=activePage?activePage.id.replace('page-',''):'';
+  if(active==='summary')renderSummary();
+  else if(active==='meadowood')renderMW();
+  else if(active==='strawberry')renderSP();
+  else if(active==='lasventanas')renderLV();
+}
+
+// ═══ INIT ═══
+function renderAllCharts(){
+  buildSummaryCharts();
+  // Re-render whichever property page is active
+  var ap = document.querySelector('.page.active');
+  var aid = ap ? ap.id.replace('page-','') : '';
+  if(aid==='meadowood') renderMW();
+  else if(aid==='strawberry') renderSP();
+  else if(aid==='lasventanas') renderLV();
+}
+
+function init(){
+  buildSummaryCharts();
+  renderSummary();
+  // On iOS, container widths may be 0 at first paint — re-render after layout settles
+  setTimeout(function(){ renderAllCharts(); }, 150);
+  setTimeout(function(){ renderAllCharts(); }, 600);
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
