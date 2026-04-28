@@ -79,6 +79,28 @@ body{font-family:var(--sans);background:var(--cream);color:var(--ink);font-weigh
 .leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
 
 .chart-wrap{height:300px;min-height:300px;position:relative;overflow:hidden;} .chart-wrap>div{width:100%;height:100%;}
+.tbl-tip{
+  position:fixed;pointer-events:none;z-index:1000;
+  background:white;border:1px solid rgba(26,25,22,0.14);
+  border-radius:8px;padding:10px 14px;
+  box-shadow:0 4px 16px rgba(26,25,22,0.13);
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:12px;color:#1A1916;min-width:200px;max-width:280px;
+  display:none;line-height:1.5;
+}
+.tbl-tip-title{font-weight:500;font-size:12px;color:#6B675E;
+  margin-bottom:5px;padding-bottom:5px;
+  border-bottom:1px solid rgba(26,25,22,0.08);}
+.tbl-tip-row{display:flex;justify-content:space-between;
+  align-items:baseline;gap:12px;margin-top:3px;}
+.tbl-tip-vendor{color:#4A4740;flex:1;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tbl-tip-amt{font-weight:500;color:#1A1916;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.tbl-tip-note{font-size:11px;color:#9A968C;margin-top:5px;
+  padding-top:5px;border-top:1px solid rgba(26,25,22,0.06);}
+.has-tip{cursor:default;}
+.has-tip:hover td{background:#FDFAF3!important;}
 .svg-tip{
   position:fixed;pointer-events:none;z-index:999;
   background:white;border:1px solid rgba(26,25,22,0.14);
@@ -164,6 +186,7 @@ tr:last-child td{border-bottom:none;}
 <body>
 
 <div class="svg-tip" id="svgTip"></div>
+<div class="tbl-tip" id="tblTip"></div>
 <header class="site-header">
   <div class="header-brand">
     <div class="brand-eyebrow">Holt Lunsford Holdings</div>
@@ -371,12 +394,12 @@ tr:last-child td{border-bottom:none;}
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
-      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="mwBreakout"></tbody></table>
+      <table><thead><tr><th>Category</th><th class="num">Routine</th><th class="num">Outlier</th><th class="num">Total</th></tr></thead><tbody id="mwBreakout"></tbody></table>
     </div>
   </div>
   <div class="section">
     <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
-    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="mwLedger"></tbody></table></div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="table-layout:fixed;width:100%"><colgroup><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"></colgroup><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="mwLedger"></tbody></table></div>
   </div>
   <div class="section">
     <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Meadowood</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
@@ -417,12 +440,12 @@ tr:last-child td{border-bottom:none;}
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
-      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="spBreakout"></tbody></table>
+      <table><thead><tr><th>Category</th><th class="num">Routine</th><th class="num">Outlier</th><th class="num">Total</th></tr></thead><tbody id="spBreakout"></tbody></table>
     </div>
   </div>
   <div class="section">
     <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
-    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Mgmt</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="spLedger"></tbody></table></div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="table-layout:fixed;width:100%"><colgroup><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"></colgroup><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Mgmt</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="spLedger"></tbody></table></div>
     <p class="note">Landscaping reflects actual contract payment dates: $11,850 May 15 · $11,850 Sep 1 · $4,366 extras Dec 2025 · $12,900 Apr 2026 (2026 installment #1).</p>
   </div>
   <div class="section">
@@ -502,7 +525,7 @@ tr:last-child td{border-bottom:none;}
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
-      <table><thead><tr><th>Category</th><th class="num">Amount</th><th class="num">% of total</th></tr></thead><tbody id="lvBreakout"></tbody></table>
+      <table><thead><tr><th>Category</th><th class="num">Routine</th><th class="num">Outlier</th><th class="num">Total</th></tr></thead><tbody id="lvBreakout"></tbody></table>
     </div>
   </div>
   <div class="section">
@@ -539,10 +562,64 @@ const LV_GA=[581,606,0,385,165,364,0,82,0,274,239,851,1042,542,1,0];
 const LV_EL=[1130,1130,1080,1080,2220,2220,2030,2030,2100,2100,1050,1050,1890,1890,1060,1060];
 const LV_DAYS=[4,6,0,7,4,9,0,6,0,7,5,5,11,9,0,0]; // days occupied Jan25-Apr26 from gas records
 
+// ── Per-category routine arrays (from Excel, all 16 months) ──
+// Vendor sub-arrays for tooltip detail
+// Meadowood Repairs & Maintenance vendors
+const MW_RPR_APS=[0,0,0,0,0,0,0,0,0,0,0,0,1022,2080,0,0]; // APS Building Services (plumbing/leak)
+const MW_RPR_24H=[0,0,0,0,0,0,0,597,400,0,0,360,0,0,1177,0]; // 24 Hour LTD (HVAC/drain)
+const MW_RPR_E2=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // E2 Illumination — in outliers
+const MW_RPR_EMP=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1770,0]; // Empire Roofing
+const MW_RPR_REI=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Reilly Homes — already in outliers
+const MW_RPR_IES=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0]; // IES network troubleshoot
+const MW_RPR_MP=[0,0,0,0,0,0,0,0,0,128,0,0,0,0,0,0]; // MP Access gate service
+// Meadowood Alarm vendors
+const MW_ALM_APX=[0,0,0,0,0,0,0,0,0,0,123,0,539,123,0,0]; // Apex Protection
+const MW_ALM_DOM=[0,0,519,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Domotics
+const MW_ALM_IES=[0,0,0,0,0,0,587,0,0,0,0,0,75,0,0,0]; // IES alarm monitoring
+const MW_ALM_DPD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Dallas Police permit (sub-threshold)
+// Strawberry Park Cleaning vendors
+const SP_CLN_REN=[0,750,0,1250,0,2350,1150,800,700,0,0,0,400,400,450,1340]; // Renova
+const SP_CLN_MTH=[0,0,0,1075,0,0,0,0,0,0,0,0,1795,0,1410,0]; // Mountain High (wait — Apr26 is 1795 from Jan26 mountain high)
+const SP_CLN_OSW=[0,0,0,2300,0,0,0,0,0,0,0,0,0,0,0,0]; // Oswaldo Romo
+// Strawberry Park Repairs vendors
+const SP_RPR_MOJ=[0,0,0,0,0,4500,450,0,0,0,0,0,0,0,0,0]; // Mojo Services screens
+const SP_RPR_SKY=[1263,0,0,350,0,1795,0,0,0,0,0,0,0,0,0,0]; // Skyline Mechanical
+const SP_RPR_MNS=[0,0,850,0,0,0,0,0,0,0,0,0,0,0,0,0]; // M&S Plumbing
+const SP_RPR_REN=[0,0,0,0,0,176,0,254,0,0,0,0,0,0,0,0]; // Renova misc repairs
+// Meadowood
+const MW_CAT_INSURANCE=[6766,6817,6815,6815,6964,6887,6887,6887,6887,6887,0,0,7187,7187,7187,0];
+const MW_CAT_LANDSCAPE=[6278,6278,0,6278,6278,0,6278,6278,6278,6278,6278,6278,6278,6278,6278,6278];
+const MW_CAT_POOL=[265,265,265,0,5195,398,0,318,1746,318,398,2949,598,335,318,318];
+const MW_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
+const MW_CAT_HOA=[3000,0,0,0,0,0,0,0,0,0,0,3000,0,0,0,0];
+const MW_CAT_REMODEL=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all Garaginization → outliers
+const MW_CAT_PEST=[0,251,251,251,251,251,251,251,251,251,251,251,251,236,264,264];
+const MW_CAT_NETWORK=[0,0,0,0,0,482,1996,0,0,0,0,0,0,0,0,0];
+const MW_CAT_ALARM=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
+const MW_CAT_INTERNET=[90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90];
+// Strawberry Park
+const SP_CAT_INSURANCE=[1794,1794,1794,1794,1794,1794,1794,1794,1794,2110,2108,2108,2108,2108,2108,0];
+const SP_CAT_CLEANING=[0,750,2300,2325,0,2350,1150,800,700,0,0,0,2195,400,1860,1340];
+const SP_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
+const SP_CAT_MGMT=[500,1000,0,500,500,500,500,1600,1000,0,500,0,500,500,500,500];
+const SP_CAT_POOL=[165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165];
+const SP_CAT_HOA=[1300,0,0,0,0,0,0,0,0,0,0,0,1300,0,0,0];
+const SP_CAT_PEST=[110,110,110,113,113,113,113,113,113,113,113,113,113,113,113,113];
+const SP_CAT_INTERNET=[92,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95];
+const SP_CAT_ALARM=[712,0,0,0,0,0,0,0,0,0,0,0,722,0,0,0];
+const SP_CAT_CABLE=[53,53,53,55,55,55,55,55,55,55,57,57,57,57,57,57];
+// Las Ventanas
+const LV_CAT_HOA=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126,8126,8126,8126]; // matches LV_HO — Rosewood monthly dues
+const LV_CAT_INSURANCE=[0,0,0,0,0,0,0,0,11490,0,0,0,0,0,0,0];
+const LV_CAT_CLEANING=[0,0,0,0,230,900,0,200,150,0,200,800,400,200,0,0];
+const LV_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
+const LV_CAT_MGMT=[0,303,0,0,0,559,0,0,0,0,0,0,0,0,0,418];
+const LV_CAT_ELEC=LV_EL; // CFE electricity estimate (bimonthly split)
+
 // Routine monthly totals (recurring only — Meadowood landscaping one-times excluded)
-const MW_ROUTINE=[16400,13702,7941,13435,18779,5846,16090,16019,18048,13953,7141,12929,18478,18768,17284,6951];
-const SP_ROUTINE=[5988,3966,5366,5396,2722,11543,4322,4876,3922,2538,3038,2538,7255,3438,4898,2270];
-const LV_ROUTINE=[9959,8422,8484,8118,12788,9577,8118,12758,19758,8118,8318,8918,10616,8525,8126,418];
+const MW_ROUTINE=[18219,15750,9169,14711,20139,9598,17051,15587,16897,15363,8341,14670,16260,19828,21482,8386];
+const SP_ROUTINE=[7183,6582,7130,7176,3609,5695,4505,5281,4489,3098,3686,3785,9177,6068,7372,3575];
+const LV_ROUTINE=[9829,10157,9198,9583,10733,12161,10148,10430,21858,10492,9607,10819,11458,10758,9187,9604];
 
 // Outliers ($2,500+ one-time items)
 const OUTLIERS={
@@ -557,8 +634,8 @@ const OUTLIERS={
   8:[{prop:'LV',vendor:'HUB International',desc:'Las Ventanas Annual Insurance Policy',amt:11490},{prop:'SP',vendor:'High Quality Masonry',desc:'Replace Stone Caps on Retaining Wall + Regrout',amt:3800},{prop:'SP',vendor:'Loff Roofing Services',desc:'Snow Stop Installation + Rehang Heat Tape',amt:2860},{prop:'MW',vendor:'Richardson Landscape',desc:'Repair Irrigation System',amt:2583}],
   11:[{prop:'MW',vendor:'APS Building Services',desc:'Plumbing System Leak Repair',amt:5307},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Extras Invoice #801SP-2025-E1',amt:4366},{prop:'MW',vendor:'Meadowood Estates HOA',desc:'Annual HOA Dues',amt:3000}],
   10:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Wooden Beams Replacement',amt:7082}],
-  12:[{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 7 Live Oaks + Labor + Sales Tax',amt:44022},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Pump',amt:10285},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets — First Payment',amt:6941},{prop:'SP',vendor:'Cazares Plastering',desc:'Bunk Bed Stain + Two Coats of Lacquer',amt:4220},{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Cloth Service + Labor',amt:2990}],
-  13:[{prop:'MW',vendor:'NTS Contractors',desc:'Concrete Work',amt:12774},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets — Second Payment + Floor Coating',amt:9378}],
+  12:[{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 7 Live Oaks + Labor + Sales Tax',amt:44022},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Pump',amt:10285},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Installment 1',amt:9378},{prop:'SP',vendor:'Cazares Plastering',desc:'Bunk Bed Stain + Two Coats of Lacquer',amt:4220},{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Cloth Service + Labor',amt:2990}],
+  13:[{prop:'MW',vendor:'NTS Contractors',desc:'Concrete Work',amt:12774},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Installment 2',amt:9378}],
   14:[{prop:'MW',vendor:'Richardson Landscape',desc:'Irrigation Repairs, Maintenance + Cleanup',amt:4085}],
   15:[{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #1',amt:12900}]
 };
@@ -574,6 +651,74 @@ const PRESETS={
 };
 let CR=[12,15];
 let mwView='all';
+
+
+// ── Category tooltip detail data ──
+const CAT_DETAIL = {
+  MW: {
+    'Insurance':                [{v:'Chubb',arr:'MW_CAT_INSURANCE',note:'$6,766–$7,187/mo · property & liability'}],
+    'Landscaping (Richardson)': [{v:'Richardson Landscape, Inc.',arr:'MW_CAT_LANDSCAPE',note:'$6,278.50/mo fixed monthly fee'}],
+    'Electricity (Cirro)':      [{v:'Cirro Energy (acct #21-253-869-8)',arr:'MW_EL',note:'See utility ledger for monthly detail'}],
+    'Pool service':             [{v:'First Class Pools & Spas',arr:'MW_CAT_POOL',note:'Monthly service + occasional repairs'}],
+    'Gas (Atmos)':              [{v:'Atmos Energy (acct #4012292205)',arr:'MW_GA',note:'See utility ledger for monthly detail'}],
+    'Water (Dallas Water)':     [{v:'Dallas Water (acct #100783634)',arr:'MW_WA',note:'See utility ledger · Dec 25–Mar 26 leak anomaly'}],
+    'Repairs & maintenance':    [
+      {v:'APS Building Services',arr:'MW_RPR_APS'},
+      {v:'24 Hour, LTD',arr:'MW_RPR_24H'},
+      {v:'E2 Illumination Designs',arr:'MW_RPR_E2'},
+      {v:'Empire Roofing, Inc.',arr:'MW_RPR_EMP'},
+      {v:'Reilly Homes, Inc',arr:'MW_RPR_REI'},
+      {v:'Integrated Electronic Solutions',arr:'MW_RPR_IES'},
+      {v:'MP Access Services',arr:'MW_RPR_MP'}
+    ],
+    'HOA dues':                 [{v:'Meadowood Estates HOA',arr:'MW_CAT_HOA',note:'$3,000/yr · billed annually'}],
+    'Pest control':             [{v:'Forterra Pest Control',arr:'MW_CAT_PEST',note:'~$251/mo'}],
+    'Alarm monitoring':         [
+      {v:'Apex Protection Services',arr:'MW_ALM_APX'},
+      {v:'Domotics',arr:'MW_ALM_DOM'},
+      {v:'Integrated Electronic Solutions',arr:'MW_ALM_IES'},
+      {v:'Dallas Police (permit)',arr:'MW_ALM_DPD'}
+    ],
+    'Network installation':     [{v:'Integrated Electronic Solutions',arr:'MW_CAT_NETWORK',note:'Monitoring & ongoing service'}],
+    'Internet':                 [{v:'AT&T Internet',arr:'MW_CAT_INTERNET',note:'$90.48/mo'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+  },
+  SP: {
+    'Insurance':          [{v:'Chubb',arr:'SP_CAT_INSURANCE',note:'$1,794–$2,108/mo · Chubb homeowner policy'}],
+    'Cleaning':                 [
+      {v:'Renova Property Solutions',arr:'SP_CLN_REN'},
+      {v:'Mountain High',arr:'SP_CLN_MTH'},
+      {v:'Oswaldo Romo',arr:'SP_CLN_OSW'}
+    ],
+    'Electricity (Holy Cross)': [{v:'Holy Cross Energy (acct #500369403)',arr:'SP_EL',note:'See utility ledger'}],
+    'Gas (Xcel)':               [{v:'Xcel Energy (acct #53-0441553-2)',arr:'SP_GA',note:'See utility ledger · heavy winter usage'}],
+    'Property management':      [{v:'Renova Property Solutions, LLC',arr:'SP_CAT_MGMT',note:'$500/mo fixed management fee'}],
+    'Repairs & maintenance':    [
+      {v:'Mojo Services (screens)',arr:'SP_RPR_MOJ'},
+      {v:'Skyline Mechanical, Inc.',arr:'SP_RPR_SKY'},
+      {v:'M&S Plumbing LLC',arr:'SP_RPR_MNS'},
+      {v:'Renova Property Solutions',arr:'SP_RPR_REN'}
+    ],
+    'Water (Eagle River)':      [{v:'Eagle River Water & Sanitation',arr:'SP_WA',note:'See utility ledger'}],
+    'Pool / spa service':       [{v:'ZYC Spa',arr:'SP_CAT_POOL',note:'$165/mo · spa service & upkeep'}],
+    'HOA dues':                 [{v:'Strawberry Park at Beaver Creek',arr:'SP_CAT_HOA',note:'$1,300/yr · billed annually'}],
+    'Pest control':             [{v:'Orkin',arr:'SP_CAT_PEST',note:'$113/mo · monthly service'}],
+    'Internet':                 [{v:'Comcast',arr:'SP_CAT_INTERNET',note:'~$95/mo'}],
+    'Alarm monitoring':         [{v:'Fischer Alarm Systems, LLC',arr:'SP_CAT_ALARM',note:'Annual contract · $722/yr'}],
+    'Cable':                    [{v:'CenturyLink',arr:'SP_CAT_CABLE',note:'~$57/mo'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+  },
+  LV: {
+    'HOA dues (Rosewood)':      [{v:'Las Ventanas al Paraíso (Rosewood)',arr:'LV_CAT_HOA',note:'$8,118–$8,126/mo · includes all resort amenities'}],
+    'Insurance (HUB Intl.)':    [{v:'HUB International',arr:'LV_CAT_INSURANCE',note:'Annual policy · billed Sep 2025'}],
+    'Electricity (CFE est.)':   [{v:'CFE (Comisión Federal de Electricidad)',arr:'LV_EL',note:'Bimonthly DAC tariff · ~18 MXN/USD · monthly est.'}],
+    'Gas (Rosewood)':           [{v:'Rosewood Hotels (usage-based)',arr:'LV_GA',note:'Billed per occupancy period · zero = unoccupied'}],
+    'Cleaning':                 [{v:'Various cleaning vendors',arr:'LV_CAT_CLEANING',note:'9 transactions Jan 2025–Dec 2025'}],
+    'Repairs & maintenance':    [{v:'Las Ventanas al Paraíso',arr:'LV_CAT_REPAIRS',note:'Pool, audio system & misc repairs'}],
+    'Management fees':          [{v:'Las Ventanas al Paraíso (Rosewood)',arr:'LV_CAT_MGMT',note:'Management & admin fees'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+  }
+};
 
 // ═══════════════════════════════════════════════════
 // SVG CHART ENGINE — no external libraries, works on all iOS browsers
@@ -629,7 +774,8 @@ function niceMax(v) {
 function fmtK(v) {
   if (v === 0) return '$0';
   if (v >= 1000000) return '$' + (v/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
-  if (v >= 1000) return '$' + Math.round(v/1000) + 'K';
+  if (v >= 10000) return '$' + Math.round(v/1000) + 'K';
+  if (v >= 1000) return '$' + (v/1000).toFixed(1).replace(/\.0K$/,'K') + 'K';
   return '$' + Math.round(v);
 }
 
@@ -652,7 +798,7 @@ function svgBar(id, datasets, labels, opts) {
     if (!stacked) for (var d = 0; d < datasets.length; d++) { var v = datasets[d].data[i] || 0; if (v > maxVal) maxVal = v; }
     if (stacked && tot > maxVal) maxVal = tot;
   }
-  var MX = niceMax(maxVal || 1);
+  var MX = opts.maxVal ? opts.maxVal : niceMax(maxVal || 1);
   var STEPS = 5;
 
   function yp(v) { return PT + cH * (1 - v / MX); }
@@ -864,6 +1010,136 @@ document.addEventListener('mousemove', function(e) {
 });
 
 
+
+// ── Table row tooltip system ──
+// Lookup table for named arrays — used by tooltip to resolve arr string → actual array
+function getArr(name) {
+  var lookup = {
+    MW_CAT_INSURANCE:MW_CAT_INSURANCE, MW_CAT_LANDSCAPE:MW_CAT_LANDSCAPE,
+    MW_EL:MW_EL, MW_CAT_POOL:MW_CAT_POOL, MW_GA:MW_GA, MW_WA:MW_WA,
+    MW_CAT_REPAIRS:MW_CAT_REPAIRS, MW_CAT_HOA:MW_CAT_HOA, MW_CAT_PEST:MW_CAT_PEST,
+    MW_CAT_ALARM:MW_CAT_ALARM, MW_CAT_NETWORK:MW_CAT_NETWORK, MW_CAT_INTERNET:MW_CAT_INTERNET,
+    MW_RPR_APS:MW_RPR_APS, MW_RPR_24H:MW_RPR_24H, MW_RPR_E2:MW_RPR_E2,
+    MW_RPR_EMP:MW_RPR_EMP, MW_RPR_REI:MW_RPR_REI, MW_RPR_IES:MW_RPR_IES, MW_RPR_MP:MW_RPR_MP,
+    MW_ALM_APX:MW_ALM_APX, MW_ALM_DOM:MW_ALM_DOM, MW_ALM_IES:MW_ALM_IES, MW_ALM_DPD:MW_ALM_DPD,
+    SP_CAT_INSURANCE:SP_CAT_INSURANCE, SP_CAT_CLEANING:SP_CAT_CLEANING,
+    SP_EL:SP_EL, SP_GA:SP_GA, SP_CAT_MGMT:SP_CAT_MGMT, SP_CAT_REPAIRS:SP_CAT_REPAIRS,
+    SP_WA:SP_WA, SP_CAT_POOL:SP_CAT_POOL, SP_CAT_HOA:SP_CAT_HOA, SP_CAT_PEST:SP_CAT_PEST,
+    SP_CAT_INTERNET:SP_CAT_INTERNET, SP_CAT_ALARM:SP_CAT_ALARM, SP_CAT_CABLE:SP_CAT_CABLE,
+    SP_CLN_REN:SP_CLN_REN, SP_CLN_MTH:SP_CLN_MTH, SP_CLN_OSW:SP_CLN_OSW,
+    SP_RPR_MOJ:SP_RPR_MOJ, SP_RPR_SKY:SP_RPR_SKY, SP_RPR_MNS:SP_RPR_MNS, SP_RPR_REN:SP_RPR_REN,
+    LV_CAT_HOA:LV_CAT_HOA, LV_CAT_INSURANCE:LV_CAT_INSURANCE, LV_EL:LV_EL,
+    LV_GA:LV_GA, LV_CAT_CLEANING:LV_CAT_CLEANING, LV_CAT_REPAIRS:LV_CAT_REPAIRS, LV_CAT_MGMT:LV_CAT_MGMT,
+  };
+  return lookup[name] || null;
+}
+
+function sumArr(arr) {
+  if (!arr) return 0;
+  var t = 0;
+  for (var i = CR[0]; i <= CR[1]; i++) t += (arr[i] || 0);
+  return t;
+}
+
+function tblTipShowCat(e, catName, detailObj) {
+  var rows = detailObj[catName];
+  if (!rows || rows.length === 0) return;
+
+  // Resolve arr references to period totals dynamically using CR
+  var displayRows = [];
+  rows.forEach(function(r) {
+    if (r.arr === null) return; // "see below" placeholder — skip
+    if (r.arr) {
+      var a = getArr(r.arr);
+      var periodTotal = sumArr(a);
+      if (periodTotal > 0) displayRows.push({v: r.v, a: periodTotal, note: r.note});
+    }
+  });
+
+  var noteRow = rows.find(function(r){ return r.note && !r.arr; }) ||
+                rows.find(function(r){ return r.note; });
+
+  var tip = document.getElementById('tblTip');
+  if (!tip) return;
+  var html = '<div class="tbl-tip-title">' + catName + '</div>';
+
+  if (displayRows.length > 0) {
+    var total = displayRows.reduce(function(s,r){ return s+r.a; }, 0);
+    displayRows.forEach(function(r) {
+      html += '<div class="tbl-tip-row">' +
+        '<span class="tbl-tip-vendor">' + r.v + '</span>' +
+        '<span class="tbl-tip-amt">$' + Math.round(r.a).toLocaleString() + '</span>' +
+        '</div>';
+    });
+    if (displayRows.length > 1) {
+      html += '<div class="tbl-tip-row" style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(26,25,22,0.08);font-weight:500">' +
+        '<span class="tbl-tip-vendor">Total</span>' +
+        '<span class="tbl-tip-amt">$' + Math.round(total).toLocaleString() + '</span>' +
+        '</div>';
+    }
+  } else if (rows[0] && rows[0].arr === null) {
+    // "See below" placeholder
+    html += '<div class="tbl-tip-note">' + (rows[0].note || 'See transaction detail below') + '</div>';
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+    tblTipPos(e.clientX, e.clientY);
+    return;
+  }
+
+  if (noteRow && noteRow.note) {
+    html += '<div class="tbl-tip-note">' + noteRow.note + '</div>';
+  }
+
+  tip.innerHTML = html;
+  tip.style.display = 'block';
+  tblTipPos(e.clientX, e.clientY);
+}
+function tblTipShow(e, rows, title) {
+  var tip = document.getElementById('tblTip');
+  if (!tip) return;
+  var html = '<div class="tbl-tip-title">' + title + '</div>';
+  rows.forEach(function(r) {
+    html += '<div class="tbl-tip-row">' +
+      '<span class="tbl-tip-vendor">' + r.v + '</span>' +
+      '<span class="tbl-tip-amt">$' + Math.round(r.a).toLocaleString() + '</span>' +
+      '</div>';
+  });
+  if (rows.length === 1 && rows[0].note) {
+    html += '<div class="tbl-tip-note">' + rows[0].note + '</div>';
+  }
+  tip.innerHTML = html;
+  tip.style.display = 'block';
+  tblTipPos(e.clientX, e.clientY);
+}
+function tblTipTouch(e, catName, detailObj) {
+  e.preventDefault();
+  var touch = e.touches[0];
+  tblTipShowCat({clientX: touch.clientX, clientY: touch.clientY}, catName, detailObj);
+  clearTimeout(tblTipTouch._t);
+  tblTipTouch._t = setTimeout(tblTipHide, 3000);
+}
+function tblTipHide() {
+  var tip = document.getElementById('tblTip');
+  if (tip) tip.style.display = 'none';
+}
+function tblTipPos(cx, cy) {
+  var tip = document.getElementById('tblTip');
+  if (!tip) return;
+  var vw = window.innerWidth, vh = window.innerHeight;
+  var tw = tip.offsetWidth || 220, th = tip.offsetHeight || 80;
+  var x = cx + 16, y = cy - th / 2;
+  if (x + tw > vw - 8) x = cx - tw - 16;
+  if (y < 8) y = 8;
+  if (y + th > vh - 8) y = vh - th - 8;
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+}
+document.addEventListener('mousemove', function(e) {
+  var tip = document.getElementById('tblTip');
+  if (tip && tip.style.display === 'block') tblTipPos(e.clientX, e.clientY);
+});
+
+
 // mk() — translates Chart.js config objects to SVG charts
 function mk(id, cfg) {
   var el = document.getElementById(id);
@@ -886,7 +1162,7 @@ function mk(id, cfg) {
       if (typeof col !== 'string') col = '#888';
       return {label: d.label || '', data: d.data || [], color: col};
     });
-    svgBar(id, ds, labels, {stacked: stacked});
+    svgBar(id, ds, labels, {stacked: stacked, maxVal: (cfg.options && cfg.options.maxVal) || undefined});
   }
 }
 
@@ -1068,9 +1344,33 @@ function renderMW(){
   mk('mwKwhChart',{type:'line',data:{labels:slL(),datasets:[{label:'kWh',data:sl(MW_KW),borderColor:'#B08A2E',backgroundColor:'rgba(176,138,46,0.07)',fill:true,tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,titleFont:{family:FONT,size:12,weight:'500'},bodyFont:{family:FONT,size:12}}},
       scales:{x:{grid:{display:false},ticks:{color:'#9A968C',font:{family:FONT,size:11},maxRotation:45}},y:{grid:{color:'rgba(26,25,22,0.06)'},ticks:{color:'#9A968C',font:{family:FONT,size:11},callback:v=>Math.round(v).toLocaleString()+' kWh'}}}}});
-  const rows=[{n:'Electricity',v:ssm(MW_EL)},{n:'Gas',v:ssm(MW_GA)},{n:'Water',v:ssm(MW_WA)},{n:'Landscaping (monthly fee)',v:n*6278.5},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
-  const grand=rows.reduce((t,r)=>t+r.v,0);
-  document.getElementById('mwBreakout').innerHTML=rows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,grand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(grand)}</td><td class="num">100%</td></tr>`;
+  // Routine categories from Excel + utility arrays
+  const mwCats=[
+    {n:'Insurance',          r:ssm(MW_CAT_INSURANCE), o:0},
+    {n:'Landscaping (Richardson)', r:ssm(MW_CAT_LANDSCAPE), o:0},
+    {n:'Electricity (Cirro)',r:ssm(MW_EL),             o:0},
+    {n:'Pool service',       r:ssm(MW_CAT_POOL),       o:0},
+    {n:'Gas (Atmos)',        r:ssm(MW_GA),              o:0},
+    {n:'Water (Dallas Water)',r:ssm(MW_WA),             o:0},
+    {n:'Repairs & maintenance',r:ssm(MW_CAT_REPAIRS),  o:0},
+    {n:'HOA dues',           r:ssm(MW_CAT_HOA),        o:0},
+    {n:'Remodeling',         r:ssm(MW_CAT_REMODEL),    o:0},
+    {n:'Pest control',       r:ssm(MW_CAT_PEST),       o:0},
+    {n:'Alarm monitoring',   r:ssm(MW_CAT_ALARM),      o:0},
+    {n:'Network installation',r:ssm(MW_CAT_NETWORK),   o:0},
+    {n:'Internet',           r:ssm(MW_CAT_INTERNET),   o:0},
+    {n:'Outliers / capex',   r:0,                      o:totO},
+  ].filter(row=>row.r+row.o>0).sort((a,b)=>(b.r+b.o)-(a.r+a.o));
+  const mwRoutTotal=mwCats.reduce((t,r)=>t+r.r,0);
+  const mwOutTotal=mwCats.reduce((t,r)=>t+r.o,0);
+  const mwGrand=mwRoutTotal+mwOutTotal;
+  document.getElementById('mwBreakout').innerHTML=
+    mwCats.map(r=>{
+      const d=CAT_DETAIL.MW[r.n];
+      const tip=d?` class="has-tip" onmouseenter="tblTipShowCat(event,'${r.n.replace(/'/g,'\'')}',CAT_DETAIL.MW)" onmouseleave="tblTipHide()"`:' ';
+      return`<tr${tip}><td>${r.n}${d?'<span style="color:var(--gold);margin-left:4px;font-size:10px;">▸</span>':''}</td><td class="num">${r.r>0?fmt(r.r):'—'}</td><td class="num">${r.o>0?fmt(r.o):'—'}</td><td class="num">${fmt(r.r+r.o)}</td></tr>`;
+    }).join('')+
+    `<tr class="row-total"><td>Total</td><td class="num">${fmt(mwRoutTotal)}</td><td class="num">${fmt(mwOutTotal)}</td><td class="num">${fmt(mwGrand)}</td></tr>`;
   const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tL=0;
   for(let i=s;i<=e;i++){const el=MW_EL[i]||0,ga=MW_GA[i]||0,wa=MW_WA[i]||0,la=6278.5;tE+=el;tG+=ga;tW+=wa;tL+=la;
     lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ga)}</td><td class="num">${fmt(wa)}</td><td class="num">${fmt(la)}</td><td class="num">${fmt(el+ga+wa+la)}</td></tr>`;}
@@ -1086,7 +1386,7 @@ function buildMWChart(){
   if(mwView==='all'||mwView==='elec')ds.push({label:'Electricity',data:tsl(MW_EL),backgroundColor:'#B08A2E'});
   if(mwView==='all'||mwView==='gas')ds.push({label:'Gas',data:tsl(MW_GA),backgroundColor:'#276663'});
   if(mwView==='all'||mwView==='water')ds.push({label:'Water',data:tsl(MW_WA),backgroundColor:'#4A8A30'});
-  mk('mwChart',{type:'bar',data:{labels:lb,datasets:ds},options:cOpts(st)});
+  mk('mwChart',{type:'bar',data:{labels:lb,datasets:ds},options:{...cOpts(st),maxVal:(mwView==='all'?7000:undefined)}});
 }
 
 // ═══ STRAWBERRY PARK ═══
@@ -1102,14 +1402,37 @@ function renderSP(){
   // Utility chart always T13M
   var spT13L=LABELS.slice(T_S,T_E+1);
   var spTsl=function(a){return a.slice(T_S,T_E+1).map(function(v){return v===null?null:v;});};
-  mk('spChart',{type:'bar',data:{labels:spT13L,datasets:[{label:'Electricity',data:spTsl(SP_EL),backgroundColor:'#378ADD'},{label:'Gas',data:spTsl(SP_GA),backgroundColor:'#276663'},{label:'Water',data:spTsl(SP_WA),backgroundColor:'#4A8A30'}]},options:cOpts(true)});
+  mk('spChart',{type:'bar',data:{labels:spT13L,datasets:[{label:'Electricity',data:spTsl(SP_EL),backgroundColor:'#378ADD'},{label:'Gas',data:spTsl(SP_GA),backgroundColor:'#276663'},{label:'Water',data:spTsl(SP_WA),backgroundColor:'#4A8A30'}]},options:{...cOpts(true),maxVal:2000}});
   mk('spGasChart',{type:'line',data:{labels:M12,datasets:[
     {label:'2025',data:[1475,1671,1614,1096,384,108,54,117,86,101,152,601],borderColor:'#276663',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#276663',borderWidth:2},
     {label:'2026',data:[856,1396,1182,490,null,null,null,null,null,null,null,null],borderColor:'#B08A2E',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2,borderDash:[5,3]}
   ]},options:cOpts(false)});
-  const rows=[{n:'Electricity',v:ssm(SP_EL)},{n:'Gas',v:ssm(SP_GA)},{n:'Water',v:ssm(SP_WA)},{n:'Property mgmt',v:n*500},{n:'Landscaping',v:ssm(SP_LAND)},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
-  const grand=rows.reduce((t,r)=>t+r.v,0);
-  document.getElementById('spBreakout').innerHTML=rows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,grand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(grand)}</td><td class="num">100%</td></tr>`;
+  const spCats=[
+    {n:'Insurance',        r:ssm(SP_CAT_INSURANCE), o:0},
+    {n:'Cleaning',               r:ssm(SP_CAT_CLEANING),  o:0},
+    {n:'Electricity (Holy Cross)',r:ssm(SP_EL),           o:0},
+    {n:'Gas (Xcel)',             r:ssm(SP_GA),            o:0},
+    {n:'Property management',    r:ssm(SP_CAT_MGMT),      o:0},
+    {n:'Repairs & maintenance',  r:ssm(SP_CAT_REPAIRS),   o:0},
+    {n:'Water (Eagle River)',    r:ssm(SP_WA),            o:0},
+    {n:'Pool / spa service',     r:ssm(SP_CAT_POOL),      o:0},
+    {n:'HOA dues',               r:ssm(SP_CAT_HOA),       o:0},
+    {n:'Pest control',           r:ssm(SP_CAT_PEST),      o:0},
+    {n:'Internet',               r:ssm(SP_CAT_INTERNET),  o:0},
+    {n:'Alarm monitoring',       r:ssm(SP_CAT_ALARM),     o:0},
+    {n:'Cable',                  r:ssm(SP_CAT_CABLE),     o:0},
+    {n:'Outliers / capex',       r:0,                     o:totO},
+  ].filter(row=>row.r+row.o>0).sort((a,b)=>(b.r+b.o)-(a.r+a.o));
+  const spRoutTotal=spCats.reduce((t,r)=>t+r.r,0);
+  const spOutTotal=spCats.reduce((t,r)=>t+r.o,0);
+  const spGrand=spRoutTotal+spOutTotal;
+  document.getElementById('spBreakout').innerHTML=
+    spCats.map(r=>{
+      const d=CAT_DETAIL.SP[r.n];
+      const tip=d?` class="has-tip" onmouseenter="tblTipShowCat(event,'${r.n.replace(/'/g,'\'')}',CAT_DETAIL.SP)" onmouseleave="tblTipHide()"`:' ';
+      return`<tr${tip}><td>${r.n}${d?'<span style="color:var(--gold);margin-left:4px;font-size:10px;">▸</span>':''}</td><td class="num">${r.r>0?fmt(r.r):'—'}</td><td class="num">${r.o>0?fmt(r.o):'—'}</td><td class="num">${fmt(r.r+r.o)}</td></tr>`;
+    }).join('')+
+    `<tr class="row-total"><td>Total</td><td class="num">${fmt(spRoutTotal)}</td><td class="num">${fmt(spOutTotal)}</td><td class="num">${fmt(spGrand)}</td></tr>`;
   const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tM=0,tL=0;
   for(let i=s;i<=e;i++){const el=SP_EL[i]||0,ga=SP_GA[i]||0,wa=SP_WA[i]||0,mg=500,la=SP_LAND[i]||0;tE+=el;tG+=ga;tW+=wa;tM+=mg;tL+=la;
     let note='';if(la===11850)note=' <span style="font-size:10px;color:#9A968C">(contract pmt)</span>';else if(la===4366)note=' <span style="font-size:10px;color:#9A968C">(extras)</span>';else if(la===12900)note=' <span style="font-size:10px;color:#9A968C">(2026 #1)</span>';
@@ -1198,9 +1521,26 @@ function renderLV(){
   document.getElementById('lvLedger').innerHTML=lh;
 
   // Cost breakout
-  const lvRows=[{n:'HOA dues',v:ssm(LV_HO)},{n:'Electricity (CFE)',v:ssm(LV_EL)},{n:'Gas',v:ssm(LV_GA)},{n:'Outliers / capex',v:totO}].filter(r=>r.v>0).sort((a,b)=>b.v-a.v);
-  const lvGrand=lvRows.reduce((t,r)=>t+r.v,0);
-  document.getElementById('lvBreakout').innerHTML=lvRows.map(r=>`<tr><td>${r.n}</td><td class="num">${fmt(r.v)}</td><td class="num">${pct(r.v,lvGrand)}</td></tr>`).join('')+`<tr class="row-total"><td>Total</td><td class="num">${fmt(lvGrand)}</td><td class="num">100%</td></tr>`;
+  const lvCats=[
+    {n:'HOA dues (Rosewood)',    r:ssm(LV_CAT_HOA),      o:0},
+    {n:'Insurance (HUB Intl.)', r:ssm(LV_CAT_INSURANCE), o:0},
+    {n:'Electricity (CFE est.)',r:ssm(LV_CAT_ELEC),      o:0},
+    {n:'Gas (Rosewood)',        r:ssm(LV_GA),            o:0},
+    {n:'Cleaning',              r:ssm(LV_CAT_CLEANING),  o:0},
+    {n:'Repairs & maintenance', r:ssm(LV_CAT_REPAIRS),   o:0},
+    {n:'Management fees',       r:ssm(LV_CAT_MGMT),      o:0},
+    {n:'Outliers / capex',      r:0,                     o:totO},
+  ].filter(row=>row.r+row.o>0).sort((a,b)=>(b.r+b.o)-(a.r+a.o));
+  const lvRoutTotal=lvCats.reduce((t,r)=>t+r.r,0);
+  const lvOutTotal=lvCats.reduce((t,r)=>t+r.o,0);
+  const lvGrand=lvRoutTotal+lvOutTotal;
+  document.getElementById('lvBreakout').innerHTML=
+    lvCats.map(r=>{
+      const d=CAT_DETAIL.LV[r.n];
+      const tip=d?` class="has-tip" onmouseenter="tblTipShowCat(event,'${r.n.replace(/'/g,'\'')}',CAT_DETAIL.LV)" onmouseleave="tblTipHide()"`:' ';
+      return`<tr${tip}><td>${r.n}${d?'<span style="color:var(--gold);margin-left:4px;font-size:10px;">▸</span>':''}</td><td class="num">${r.r>0?fmt(r.r):'—'}</td><td class="num">${r.o>0?fmt(r.o):'—'}</td><td class="num">${fmt(r.r+r.o)}</td></tr>`;
+    }).join('')+
+    `<tr class="row-total"><td>Total</td><td class="num">${fmt(lvRoutTotal)}</td><td class="num">${fmt(lvOutTotal)}</td><td class="num">${fmt(lvGrand)}</td></tr>`;
 
   buildOutlierList('lvOutlierList','LV');
 }
