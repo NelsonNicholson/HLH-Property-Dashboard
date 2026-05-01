@@ -509,13 +509,24 @@ tr:last-child td{border-bottom:none;}
   </div>
   <div class="kpi-row" id="lv-kpis"></div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Electricity &amp; Gas — combined</div><div class="section-title">Monthly spend with days occupied</div><div class="section-sub">CFE electricity (est.) + Rosewood gas · hover or tap a bar to see days occupied</div></div>
+    <div class="section-head"><div class="section-eyebrow">Electricity &amp; Gas — combined</div><div class="section-title">Monthly spend with days occupied</div><div class="section-sub">Apr 2025 – Apr 2026 · Trailing 13 months · CFE electricity (est.) + Rosewood gas · hover or tap a bar to see days occupied</div></div>
     <div class="legend">
       <span><span class="leg-dot" style="background:#BE4432"></span>Electricity (CFE est.)</span>
       <span><span class="leg-dot" style="background:#276663"></span>Gas (Rosewood)</span>
     </div>
     <div class="chart-wrap tall"><div id="lvCombinedChart"></div></div>
-    <p class="note">Electricity billed bimonthly — monthly estimates split equally. Gas billed by Rosewood on usage/refill basis; zero months = unoccupied.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="section-eyebrow">Cabo San Lucas — climate context</div>
+      <div class="section-title">Avg temperature &amp; humidity · Apr 2025 – Apr 2026</div>
+      <div class="section-sub">Actual recorded monthly averages · Source: Visual Crossing weather data</div>
+    </div>
+    <div id="lvWeatherRow" style="overflow-x:auto;margin-bottom:1rem;"></div>
+    <p class="note" style="font-style:normal;color:var(--ink-mid);font-size:12.5px;line-height:1.65;">
+      Electricity consumption at Las Ventanas stays elevated year-round ($1,060–$2,220/mo) because even Cabo's cooler winter months average 71–74°F — A/C runs continuously rather than seasonally. The summer humidity spike (63–77%, May–Sep) compounds cooling demand, pushing bills higher. This explains why electricity cost tracks temperature and humidity more than it tracks days occupied. Gas, by contrast, is entirely occupancy-driven — it goes to zero in unoccupied months regardless of outdoor conditions.
+    </p>
   </div>
 
   <div class="two-col">
@@ -1448,6 +1459,63 @@ function renderSP(){
 
 // ═══ LAS VENTANAS ═══
 
+
+// ── Cabo San Lucas climate data — T13M (Apr 2025 – Apr 2026) ──
+// Source: Visual Crossing actual recorded data. °F, % humidity. Apr 2025–Apr 2026.
+const LV_TEMP_F=[73,76,79,83,84,83,80,77,74,72,71,74,76]; // actual monthly averages Apr 2025–Apr 2026  // avg monthly temp °F
+const LV_HUM=[50,51,63,64,67,77,71,60,64,63,62,62,57]; // actual monthly averages Apr 2025–Apr 2026      // avg monthly humidity %
+
+function buildLVWeatherRow(){
+  var el=document.getElementById('lvWeatherRow');
+  if(!el)return;
+  var T13L=LABELS.slice(T_S,T_E+1);
+  var chartEl=document.getElementById('lvCombinedChart');
+  var W=chartEl?chartEl.clientWidth||560:560;
+  var PL=58,PR=12,n=13;
+  var cW=W-PL-PR;
+  var bGroupW=cW/n;
+  var LABEL_W=72; // fixed label column width — enough for "Avg Humidity"
+
+  var ROW_STYLE='height:22px;border-top:1px solid rgba(26,25,22,0.06);';
+  var LABEL_STYLE='font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:#4A4740;white-space:nowrap;padding-right:10px;text-align:right;vertical-align:middle;width:'+LABEL_W+'px;';
+  var CELL_STYLE='text-align:center;font-size:11px;font-variant-numeric:tabular-nums;vertical-align:middle;font-weight:400;color:#4A4740;';
+
+  var html='<table style="width:100%;border-collapse:collapse;margin-top:6px;table-layout:fixed;">';
+  html+='<colgroup>';
+  html+='<col style="width:'+LABEL_W+'px">';
+  for(var i=0;i<n;i++) html+='<col style="width:'+Math.round(bGroupW)+'px">';
+  html+='<col>';
+  html+='</colgroup>';
+
+  // Month header row
+  var HEADER_STYLE='text-align:center;font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:#9A968C;padding-bottom:4px;vertical-align:bottom;';
+  html+='<tr>';
+  html+='<td style="width:'+LABEL_W+'px;"></td>';
+  for(var i=0;i<n;i++){
+    html+='<td style="'+HEADER_STYLE+'">'+T13L[i].replace(' ','<br>')+'</td>';
+  }
+  html+='<td></td></tr>';
+
+  // Avg Temp row
+  html+='<tr style="'+ROW_STYLE+'">';
+  html+='<td style="'+LABEL_STYLE+'">Avg Temp</td>';
+  for(var i=0;i<n;i++){
+    html+='<td style="'+CELL_STYLE+'">'+LV_TEMP_F[i]+'°F</td>';
+  }
+  html+='<td></td></tr>';
+
+  // Avg Humidity row
+  html+='<tr style="'+ROW_STYLE+'">';
+  html+='<td style="'+LABEL_STYLE+'">Avg Humidity</td>';
+  for(var i=0;i<n;i++){
+    html+='<td style="'+CELL_STYLE+'">'+LV_HUM[i]+'%</td>';
+  }
+  html+='<td></td></tr>';
+
+  html+='</table>';
+  el.innerHTML=html;
+}
+
 // ── Las Ventanas: Combined electricity + gas chart (T13M, fixed window) ──
 function buildLVCombined(){
   var el=document.getElementById('lvCombinedChart');
@@ -1512,6 +1580,7 @@ function renderLV(){
 
   // Combined electricity + gas chart (T13M, with days occupied in tooltip)
   buildLVCombined();
+  buildLVWeatherRow();
 
   // Expense ledger (filter-driven)
   const[s,e]=CR;let lh='',tH=0,tG2=0,tE=0;
@@ -1564,7 +1633,7 @@ function renderAllCharts(){
   var aid = ap ? ap.id.replace('page-','') : '';
   if(aid==='meadowood') renderMW();
   else if(aid==='strawberry') renderSP();
-  else if(aid==='lasventanas') renderLV();
+  else if(aid==='lasventanas'){ renderLV(); }
 }
 
 function init(){
