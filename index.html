@@ -215,6 +215,7 @@ tr:last-child td{border-bottom:none;}
     <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
     <option value="12">Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
     <option value="15">Apr 2026</option>
+    <option value="16">May 2026</option>
   </select>
   <div class="filter-divider"></div>
   <span class="filter-custom-label">Range:</span>
@@ -225,6 +226,7 @@ tr:last-child td{border-bottom:none;}
     <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
     <option value="12" selected>Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
     <option value="15">Apr 2026</option>
+  <option value="16">May 2026</option>
   </select>
   <span class="filter-custom-label">to</span>
   <select class="filter-sel" id="rangeEnd" onchange="setRange()">
@@ -662,7 +664,7 @@ const PRESETS={
   ytd26:{label:'2026 YTD · Jan – May',r:[12,16]},
   fy2025:{label:'FY 2025 · Jan – Dec',r:[0,11]}
 };
-let CR=[12,15];
+let CR=[12,16];
 let mwView='all';
 
 
