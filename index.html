@@ -198,7 +198,7 @@ tr:last-child td{border-bottom:none;}
     <button class="nav-btn" onclick="showPage('strawberry',this)">Strawberry Park</button>
     <button class="nav-btn" onclick="showPage('lasventanas',this)">Las Ventanas</button>
   </nav>
-  <div class="header-meta">Last updated<b>Jun 3, 2026</b></div>
+  <div class="header-meta">Last updated<b>Oct 20, 2026</b></div>
 </header>
 
 <div class="filter-bar">
@@ -215,7 +215,7 @@ tr:last-child td{border-bottom:none;}
     <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
     <option value="12">Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
     <option value="15">Apr 2026</option>
-    <option value="16">May 2026</option>
+    <option value="16">May 2026</option><option value="17">Jun 2026</option><option value="18">Jul 2026</option><option value="19">Aug 2026</option><option value="20">Sep 2026</option><option value="21">Oct 2026 (partial)</option>
   </select>
   <div class="filter-divider"></div>
   <span class="filter-custom-label">Range:</span>
@@ -226,7 +226,7 @@ tr:last-child td{border-bottom:none;}
     <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
     <option value="12" selected>Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
     <option value="15">Apr 2026</option>
-  <option value="16">May 2026</option>
+  <option value="16">May 2026</option><option value="17">Jun 2026</option><option value="18">Jul 2026</option><option value="19">Aug 2026</option><option value="20">Sep 2026</option><option value="21">Oct 2026 (partial)</option>
   </select>
   <span class="filter-custom-label">to</span>
   <select class="filter-sel" id="rangeEnd" onchange="setRange()">
@@ -236,9 +236,9 @@ tr:last-child td{border-bottom:none;}
     <option value="9">Oct 2025</option><option value="10">Nov 2025</option><option value="11">Dec 2025</option>
     <option value="12">Jan 2026</option><option value="13">Feb 2026</option><option value="14">Mar 2026</option>
     <option value="15">Apr 2026</option>
-  <option value="16" selected>May 2026</option>
+  <option value="16">May 2026</option><option value="17">Jun 2026</option><option value="18">Jul 2026</option><option value="19">Aug 2026</option><option value="20">Sep 2026</option><option value="21" selected>Oct 2026 (partial)</option>
   </select>
-  <span class="filter-badge" id="filterBadge">2026 YTD · Jan – May</span>
+  <span class="filter-badge" id="filterBadge">2026 YTD · Jan – Oct 20</span>
 </div>
 
 <main class="main">
@@ -251,15 +251,15 @@ tr:last-child td{border-bottom:none;}
     <div class="hero-sub">Meadowood · Dallas, TX &nbsp;·&nbsp; Strawberry Park · Beaver Creek, CO &nbsp;·&nbsp; Las Ventanas · Cabo San Lucas, MX</div>
     <div style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:5px 14px;">
       <span style="font-size:11px;color:#7A5C1A;letter-spacing:.12em;text-transform:uppercase;font-weight:500;">Showing</span>
-      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;font-weight:400;" id="periodLabel">2026 YTD · Jan – May</span>
+      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;font-weight:400;" id="periodLabel">2026 YTD · Jan – Oct 20</span>
     </div>
   </div>
 
   <div id="alert-leak" class="alert-strip danger">
     <span class="alert-icon">⚠</span>
     <div class="alert-body">
-      <strong>Meadowood — water leak (Dec 2025 – Mar 2026 · ~$9,450 excess)</strong>
-      Dallas Water spiked from ~$200/mo to $827 (Dec) → $3,867 (Feb 26) → $5,990 (Mar 26). April 2026 normalized at $187. The cause is actively being investigated. As of June 3, 2026, the matter remains under review with the City of Dallas.
+      <strong>Meadowood — water leak (Dec 2025 – Mar 2026 · ~$9,450 excess) · credit granted</strong>
+      Dallas Water spiked from ~$200/mo to $827 (Dec) → $3,867 (Feb 26) → $5,990 (Mar 26), then normalized at ~$190–$225 in Apr–May 2026. The City of Dallas granted a credit for the leak, and no water bill has been received since May 2026 — Jun–Oct 2026 show $0 while the credit is applied.
     </div>
   </div>
 
@@ -269,7 +269,7 @@ tr:last-child td{border-bottom:none;}
       <div class="prop-name">Meadowood</div>
       <div class="prop-loc">Dallas, TX · 4650 Meadowood Rd</div>
       <div class="prop-total" id="pc-mw">—</div>
-      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-mw">2026 YTD · Jan – May</span></div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-mw">2026 YTD · Jan – Oct 20</span></div>
       <div class="prop-breakdown" id="pc-mw-sub">—</div>
       <div class="prop-cta">Tap to explore →</div>
     </div>
@@ -278,7 +278,7 @@ tr:last-child td{border-bottom:none;}
       <div class="prop-name">Strawberry Park</div>
       <div class="prop-loc">Beaver Creek, CO · 801 Strawberry Park Rd</div>
       <div class="prop-total" id="pc-sp">—</div>
-      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-sp">2026 YTD · Jan – May</span></div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-sp">2026 YTD · Jan – Oct 20</span></div>
       <div class="prop-breakdown" id="pc-sp-sub">—</div>
       <div class="prop-cta">Tap to explore →</div>
     </div>
@@ -287,7 +287,7 @@ tr:last-child td{border-bottom:none;}
       <div class="prop-name">Las Ventanas</div>
       <div class="prop-loc">Cabo San Lucas, MX · PH 5501</div>
       <div class="prop-total" id="pc-lv">—</div>
-      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-lv">2026 YTD · Jan – May</span></div>
+      <div style="margin-top:.4rem"><span class="card-period-label" id="card-period-lv">2026 YTD · Jan – Oct 20</span></div>
       <div class="prop-breakdown" id="pc-lv-sub">—</div>
       <div class="prop-cta">Tap to explore →</div>
     </div>
@@ -297,7 +297,7 @@ tr:last-child td{border-bottom:none;}
     <div class="section-head">
       <div class="section-eyebrow">Routine &amp; recurring monthly spend</div>
       <div class="section-title">Cost by property — trailing 13 months</div>
-      <div class="section-sub">May 2025 – May 2026 · Stacked by property · All recurring expenses. Large one-time outliers excluded.</div>
+      <div class="section-sub">Oct 2025 – Oct 2026 (Oct partial) · Stacked by property · All recurring expenses. Large one-time outliers excluded.</div>
     </div>
     <div class="legend">
       <span><span class="leg-dot" style="background:#B08A2E"></span>Meadowood (top)</span>
@@ -325,7 +325,7 @@ tr:last-child td{border-bottom:none;}
     <div class="section-head">
       <div class="section-eyebrow">Non-recurring outlier expenses</div>
       <div class="section-title">One-time &amp; project spend — trailing 13 months</div>
-      <div class="section-sub">May 2025 – May 2026 · Stacked by property · $2,500+ threshold</div>
+      <div class="section-sub">Oct 2025 – Oct 2026 (Oct partial) · Stacked by property · one-time items</div>
     </div>
     <div class="legend">
       <span><span class="leg-dot" style="background:#B08A2E"></span>Meadowood (top)</span>
@@ -339,7 +339,7 @@ tr:last-child td{border-bottom:none;}
     <div class="section-head">
       <div class="section-eyebrow">Capital &amp; repairs log</div>
       <div class="section-title">Outlier transaction detail — newest to oldest</div>
-      <div class="section-sub">One-off expenses $2,500+ · selected period</div>
+      <div class="section-sub">One-time expenses · 2026 includes all one-time items (2025: $2,500+) · selected period</div>
     </div>
     <div id="outlierList"></div>
   </div>
@@ -350,29 +350,29 @@ tr:last-child td{border-bottom:none;}
   <div class="page-hero">
     <div class="hero-eyebrow">Primary Residence · Dallas, TX</div>
     <div class="hero-title">Meadowood</div>
-    <div class="hero-sub">4650 Meadowood Rd · Dallas TX 75220 · Cirro Energy · Atmos Gas · Dallas Water · Richardson Landscape</div>
+    <div class="hero-sub">4650 Meadowood Rd · Dallas TX 75220 · Cirro → NRG (Jul 2026) · Atmos Gas · Dallas Water · Richardson Landscape</div>
     <div style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:5px 14px;">
       <span style="font-size:11px;color:#7A5C1A;letter-spacing:.12em;text-transform:uppercase;font-weight:500;">Showing</span>
-      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="mw-period-label">2026 YTD · Jan – May</span>
+      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="mw-period-label">2026 YTD · Jan – Oct 20</span>
     </div>
   </div>
   <div id="alert-mw" class="alert-strip danger">
     <span class="alert-icon">⚠</span>
     <div class="alert-body">
-      <strong>Water leak — Dec 2025 through Mar 2026 (~$9,450 excess)</strong>
-      Normal ~$200/mo. Dec $827 · Feb 26 $3,867 · Mar 26 $5,990. April 2026 normalized at $187. The cause is actively being investigated. As of June 3, 2026, the matter remains under review with the City of Dallas.
+      <strong>Water leak — Dec 2025 through Mar 2026 (~$9,450 excess) · credit granted</strong>
+      Normal ~$200/mo. Dec $827 · Feb 26 $3,867 · Mar 26 $5,990. Normalized Apr–May 2026. The City of Dallas granted a leak credit; no Dallas Water bill has been received since May 2026, so Jun–Oct 2026 show $0.
     </div>
   </div>
   <div style="margin-bottom:.6rem;display:flex;align-items:center;gap:8px;">
     <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A968C;font-weight:500;">Cost summary</span>
-    <span id="mw-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – May</span>
+    <span id="mw-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – Oct 20</span>
   </div>
   <div class="kpi-row" id="mw-kpis"></div>
   <div class="section">
     <div class="section-head">
       <div class="section-eyebrow">Monthly spend</div>
       <div class="section-title">Utilities by type</div>
-      <div class="section-sub">May 2025 – May 2026 · Trailing 13 months · Electricity · Gas · Water</div>
+      <div class="section-sub">Oct 2025 – Oct 2026 (Oct partial) · Trailing 13 months · Electricity · Gas · Water</div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem;flex-wrap:wrap;gap:8px;">
       <div class="legend" style="margin-bottom:0">
@@ -393,7 +393,7 @@ tr:last-child td{border-bottom:none;}
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Electricity</div><div class="section-title">kWh consumption</div></div>
       <div class="chart-wrap"><div id="mwKwhChart"></div></div>
-      <p class="note">Peak Aug 2025: 12,040 kWh ($1,367). Low Apr 2025: 6,640 kWh ($747). Rate ~$0.105–$0.114/kWh. Apr 2026: 6,920 kWh · $857.53.</p>
+      <p class="note">Provider switched from Cirro to NRG in summer 2026 — energy rate $0.0498 → $0.0674/kWh (+35%), all-in ~$0.143/kWh vs ~$0.113. Sep 2026 bill: 13,360 kWh · $1,911.51 (2026 peak). Peak Aug 2025: 12,040 kWh ($1,367). Jun 2026 kWh (~11,190) is estimated — Cirro never issued a final statement, so usage is derived from the $1,258.31 charge at the Jan–May Cirro rate.</p>
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
@@ -405,7 +405,7 @@ tr:last-child td{border-bottom:none;}
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="table-layout:fixed;width:100%"><colgroup><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"><col style="width:16.67%"></colgroup><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="mwLedger"></tbody></table></div>
   </div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Meadowood</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Meadowood</div><div class="section-sub">One-time spend · selected period</div></div>
     <div id="mwOutlierList"></div>
   </div>
 </div>
@@ -418,16 +418,16 @@ tr:last-child td{border-bottom:none;}
     <div class="hero-sub">801 Strawberry Park Rd · Beaver Creek CO 81620 · Holy Cross Energy · Xcel Energy · Eagle River Water · Renova · Intermountain Landscaping</div>
     <div style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:5px 14px;">
       <span style="font-size:11px;color:#7A5C1A;letter-spacing:.12em;text-transform:uppercase;font-weight:500;">Showing</span>
-      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="sp-period-label">2026 YTD · Jan – May</span>
+      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="sp-period-label">2026 YTD · Jan – Oct 20</span>
     </div>
   </div>
   <div style="margin-bottom:.6rem;display:flex;align-items:center;gap:8px;">
     <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A968C;font-weight:500;">Cost summary</span>
-    <span id="sp-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – May</span>
+    <span id="sp-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – Oct 20</span>
   </div>
   <div class="kpi-row kpi-row-5" id="sp-kpis" style="grid-template-columns:repeat(5,1fr)"></div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Monthly spend</div><div class="section-title">Utilities — seasonal pattern</div><div class="section-sub">May 2025 – May 2026 · Trailing 13 months · Electricity · Gas · Water</div></div>
+    <div class="section-head"><div class="section-eyebrow">Monthly spend</div><div class="section-title">Utilities — seasonal pattern</div><div class="section-sub">Oct 2025 – Oct 2026 (Oct partial) · Trailing 13 months · Electricity · Gas · Water</div></div>
     <div class="legend">
       <span><span class="leg-dot" style="background:#378ADD"></span>Electricity</span>
       <span><span class="leg-dot" style="background:#276663"></span>Gas</span>
@@ -439,7 +439,7 @@ tr:last-child td{border-bottom:none;}
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Gas — Xcel Energy</div><div class="section-title">2025 vs 2026 heating season</div></div>
       <div class="chart-wrap"><div id="spGasChart"></div></div>
-      <p class="note">2026 winter warmer — heating demand down ~18%. Feb 2025 peak: $1,671 vs Feb 2026: $1,396.</p>
+      <p class="note">2026 winter warmer — heating demand down ~18%. Feb 2025 peak: $1,671 vs Feb 2026: $1,396. Summer 2026 ran $77–$134/mo, in line with 2025.</p>
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
@@ -449,7 +449,7 @@ tr:last-child td{border-bottom:none;}
   <div class="section">
     <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
     <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="table-layout:fixed;width:100%"><colgroup><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"><col style="width:14.29%"></colgroup><thead><tr><th>Month</th><th class="num">Electricity</th><th class="num">Gas</th><th class="num">Water</th><th class="num">Mgmt</th><th class="num">Landscaping</th><th class="num">Total</th></tr></thead><tbody id="spLedger"></tbody></table></div>
-    <p class="note">Landscaping reflects actual contract payment dates: $11,850 May 15 · $11,850 Sep 1 · $4,366 extras Dec 2025 · $12,900 Apr 2026 (2026 installment #1).</p>
+    <p class="note">Landscaping reflects actual contract payment dates: $11,850 May 15 · $11,850 Sep 1 · $4,366 extras Dec 2025 · $12,900 Apr 6, 2026 (installment #1) · $12,900 Sep 1, 2026 (installment #2). Mgmt column shows Renova fees as billed (Apr–May fees billed together in June).</p>
   </div>
   <div class="section">
     <div class="section-head"><div class="section-eyebrow">Intermountain Landscaping &amp; Maintenance</div><div class="section-title">Contract &amp; extras detail</div></div>
@@ -474,11 +474,11 @@ tr:last-child td{border-bottom:none;}
         <div class="land-contract">
           <div class="land-contract-head"><span>2026 Contract</span><strong>$25,800</strong></div>
           <table><tr><td>Spring clean-ups</td><td class="num">$4,475</td></tr><tr><td>Summer care</td><td class="num">$8,025</td></tr><tr><td>Flowers</td><td class="num">$12,200</td></tr><tr><td>Fall services</td><td class="num">$1,100</td></tr><tr class="row-total"><td>Contract total</td><td class="num">$25,800</td></tr><tr class="early-row"><td>Early-pay (3%, by Apr 9)</td><td class="num">→ $25,026</td></tr></table>
-          <div class="land-note">Payments: $12,900 due May 15 · $12,900 due Sep 1</div>
+          <div class="land-note">Paid: $12,900 Apr 6 · $12,900 Sep 1, 2026</div>
         </div>
         <div class="land-contract">
           <div class="land-contract-head"><span>2026 Extras <span class="tm-badge">Pending — end of season</span></span><strong>TBD</strong></div>
-          <table><tr><td style="color:var(--ink-soft);font-style:italic" colspan="2">Budget ~$4,000–$5,000 based on 2025 actuals. 2026 T&amp;M rates increased. Invoice expected December 2026.</td></tr></table>
+          <table><tr><td style="color:var(--ink-soft);font-style:italic" colspan="2">Budget ~$4,000–$5,000 based on 2025 actuals. 2026 T&amp;M rates increased. Invoice expected December 2026. Separately, Mountain Valley Ventures billed $2,160 for weed &amp; tree care in Jun–Jul 2026.</td></tr></table>
           <div class="land-note">2026 est. total: $25,800 + ~$4,500 extras = <strong>~$30,300</strong></div>
         </div>
         <div class="section" style="margin-top:1rem">
@@ -489,7 +489,7 @@ tr:last-child td{border-bottom:none;}
     </div>
   </div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Strawberry Park</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Strawberry Park</div><div class="section-sub">One-time spend · selected period</div></div>
     <div id="spOutlierList"></div>
   </div>
 </div>
@@ -502,17 +502,17 @@ tr:last-child td{border-bottom:none;}
     <div class="hero-sub">Penthouse 5501 · Las Ventanas al Paraíso · Km 19.5, Carretera Transpeninsular · Rosewood HOA · CFE · Rosewood gas</div>
     <div style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:5px 14px;">
       <span style="font-size:11px;color:#7A5C1A;letter-spacing:.12em;text-transform:uppercase;font-weight:500;">Showing</span>
-      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="lv-period-label">2026 YTD · Jan – May</span>
+      <span style="font-family:var(--serif);font-size:15px;color:#7A5C1A;" id="lv-period-label">2026 YTD · Jan – Oct 20</span>
     </div>
   </div>
   
   <div style="margin-bottom:.6rem;display:flex;align-items:center;gap:8px;">
     <span style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#9A968C;font-weight:500;">Cost summary</span>
-    <span id="lv-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – May</span>
+    <span id="lv-kpi-period" style="font-size:11px;color:#7A5C1A;background:#F3E8CA;border:1px solid var(--gold);border-radius:100px;padding:2px 10px;font-weight:500;">2026 YTD · Jan – Oct 20</span>
   </div>
   <div class="kpi-row" id="lv-kpis"></div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Electricity &amp; Gas — combined</div><div class="section-title">Monthly spend with days occupied</div><div class="section-sub">May 2025 – May 2026 · Trailing 13 months · CFE electricity (est.) + Rosewood gas · hover or tap a bar to see days occupied</div></div>
+    <div class="section-head"><div class="section-eyebrow">Electricity &amp; Gas — combined</div><div class="section-title">Monthly spend with days occupied</div><div class="section-sub">Oct 2025 – Oct 2026 (Oct partial) · Trailing 13 months · CFE electricity (prorated) + Rosewood gas · hover or tap a bar to see days occupied</div></div>
     <div class="legend">
       <span><span class="leg-dot" style="background:#BE4432"></span>Electricity (CFE est.)</span>
       <span><span class="leg-dot" style="background:#276663"></span>Gas (Rosewood)</span>
@@ -523,19 +523,19 @@ tr:last-child td{border-bottom:none;}
   <div class="section">
     <div class="section-head">
       <div class="section-eyebrow">Cabo San Lucas — climate context</div>
-      <div class="section-title">Avg temperature &amp; humidity · May 2025 – May 2026</div>
-      <div class="section-sub">Actual recorded data (Apr 2025–Apr 2026) + May 2026 est. · Source: Visual Crossing</div>
+      <div class="section-title">Avg temperature &amp; humidity · Oct 2025 – Oct 2026</div>
+      <div class="section-sub">Actual recorded data Oct 2025 – Oct 20, 2026 · Source: Visual Crossing</div>
     </div>
     <div id="lvWeatherRow" style="overflow-x:auto;margin-bottom:1rem;"></div>
     <p class="note" style="font-style:normal;color:var(--ink-mid);font-size:12.5px;line-height:1.65;">
-      Electricity consumption at Las Ventanas stays elevated year-round ($1,060–$2,220/mo) because even Cabo's cooler winter months average 71–74°F — A/C runs continuously rather than seasonally. The summer humidity spike (63–77%, May–Sep) compounds cooling demand, pushing bills higher. This explains why electricity cost tracks temperature and humidity more than it tracks days occupied. Gas, by contrast, is entirely occupancy-driven — it goes to zero in unoccupied months regardless of outdoor conditions.
+      Electricity at Las Ventanas never drops to zero (roughly $260–$1,100/mo in cooler months, rising to $1,300–$2,000/mo in summer 2026) because even Cabo's cooler winter months average 71–74°F — A/C runs continuously rather than seasonally. Summer 2026 ran hotter and more humid than 2025 (84–85°F in Jul–Sep, humidity climbing to 76% by Sep–Oct), compounding cooling demand, pushing bills higher. This explains why electricity cost tracks temperature and humidity more than it tracks days occupied. Gas, by contrast, is entirely occupancy-driven — it goes to zero in unoccupied months regardless of outdoor conditions.
     </p>
   </div>
 
   <div class="two-col">
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Expense ledger</div><div class="section-title">Monthly detail · selected period</div></div>
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">HOA</th><th class="num">Gas</th><th class="num">Elec. (est.)</th><th class="num">Total</th></tr></thead><tbody id="lvLedger"></tbody></table></div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table><thead><tr><th>Month</th><th class="num">HOA</th><th class="num">Gas</th><th class="num">Elec. (CFE)</th><th class="num">Total</th></tr></thead><tbody id="lvLedger"></tbody></table></div>
     </div>
     <div class="section">
       <div class="section-head"><div class="section-eyebrow">Cost breakout</div><div class="section-title">By category · selected period</div></div>
@@ -543,7 +543,7 @@ tr:last-child td{border-bottom:none;}
     </div>
   </div>
   <div class="section">
-    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Las Ventanas</div><div class="section-sub">One-off spend $2,500+ · selected period</div></div>
+    <div class="section-head"><div class="section-eyebrow">Capital &amp; repairs</div><div class="section-title">Outlier expenses · Las Ventanas</div><div class="section-sub">One-time spend · selected period</div></div>
     <div id="lvOutlierList"></div>
   </div>
 </div>
@@ -552,92 +552,95 @@ tr:last-child td{border-bottom:none;}
 
 <footer class="site-footer">
   <div class="footer-brand">Holt Lunsford Holdings — Property Dashboard</div>
-  <div>All amounts USD · CFE ~18 MXN/USD · Data through May 2026 · Confidential</div>
+  <div>All amounts USD · CFE ~18 MXN/USD · Data through Oct 20, 2026 (Oct partial) · Confidential</div>
 </footer>
 
 <script>
 // ═══════════════════════════════════════════════════
-// DATA — 16 months, idx 0 = Jan 2025 … idx 15 = Apr 2026
+// DATA — 22 months, idx 0 = Jan 2025 … idx 21 = Oct 2026 (Oct 2026 partial, through Oct 20)
+// 2025: prior build (QuickBooks Excel + OneDrive statements)
+// 2026: rebuilt from QuickBooks "RHL Household Expenses YTD 2026 (10.20.2026)" GL + OneDrive statements
+//   Excluded GL accounts: Country Club of the Rockies, El Dorado Golf Club, IRS tax refund
 // ═══════════════════════════════════════════════════
-const LABELS=['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
+const LABELS=['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26','Oct 26'];
 const M12=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const LAST_IDX=21; // Oct 2026 (partial)
 
-// Utilities (from OneDrive statements)
-const MW_EL=[927,915,850,747,875,1017,1171,1367,1219,1125,815,836,840,827,765,858,852];
-const MW_GA=[681,934,695,320,268,230,199,204,222,215,302,439,816,1008,590,391,273];
-const MW_WA=[212,200,203,210,218,243,179,192,204,199,207,827,200,3867,5990,187,218];
-const MW_KW=[8040,7880,7400,6640,7680,8960,10280,12040,10240,9360,6840,6960,7120,6920,6400,6920,6920];
-const SP_EL=[631,644,719,768,203,205,259,247,201,169,196,326,756,939,1012,545,233];
-const SP_GA=[1475,1671,1614,1096,384,108,54,117,86,101,152,601,856,1396,1182,490,197];
-const SP_WA=[351,300,280,265,300,310,320,295,280,290,300,320,310,295,280,270,378];
-const SP_LAND=[0,0,0,0,11850,0,0,0,11850,0,0,4366,0,0,0,12900,12900];
-const LV_HO=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126,8126,8126,8126,8126];
-const LV_GA=[581,606,0,385,165,364,0,82,0,274,239,851,1042,542,1,0,322];
-const LV_EL=[1130,1130,1080,1080,2220,2220,2030,2030,2100,2100,1050,1050,1890,1890,1060,1060,2220];
-const LV_DAYS=[4,6,0,7,4,9,0,6,0,7,5,5,11,9,0,0,13]; // days occupied Jan25-Apr26 from gas records
+// Utilities (OneDrive statements; month = bill/statement date)
+const MW_EL=[927,915,850,747,875,1017,1171,1367,1219,1125,815,836,839.52,827.49,765.48,857.53,852.28,1258.31,1495.29,1579.98,1911.51,0]; // Cirro through Jun 2026 · NRG from Jul 2026
+const MW_GA=[681,934,695,320,268,230,199,204,222,215,302,439,815.65,1007.66,590.18,390.5,273.01,256.69,258.16,301.63,260.28,223.41];
+const MW_WA=[212,200,203,210,218,243,179,192,204,199,207,827,200,3867,5990,187,218,0,0,0,0,0]; // Jun–Oct 2026: no Dallas Water bill received since the leak credit was granted
+const MW_KW=[8040,7880,7400,6640,7680,8960,10280,12040,10240,9360,6840,6960,7120,6920,6400,6920,6920,11190,10400,10960,13360,null]; // Jun 26 est. (no Cirro final bill — derived from $1,258.31 at Jan–May Cirro cost/kWh); Oct 26 not yet billed
+const SP_EL=[631,644,719,768,203,205,259,247,201,169,196,326,756,939,1012,545,233,195,266,429,289,266];
+const SP_GA=[1475,1671,1614,1096,384,108,54,117,86,101,152,601,856.26,1395.65,1181.95,490.17,197.38,133.83,82.16,81.38,77.35,97.45];
+const SP_WA=[351,300,280,265,300,310,320,295,280,290,300,320,372.77,373.63,373.91,397.44,377.53,378.14,749.72,848.24,645.87,444.38];
+const SP_LAND=[0,0,0,0,11850,0,0,0,11850,0,0,4366,0,0,0,12900,0,0,0,0,12900,0]; // Intermountain contract payments (shown in outliers, not routine)
+const LV_HO=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36]; // Rosewood monthly HOA dues
+const LV_GA=[581,606,0,385,165,364,0,82,0,274,239,851,1042.14,542.46,1.47,0,322.23,327.62,16.53,0,97.97,0]; // by Rosewood statement month
+const LV_EL=[594.98,527.7,572.8,549.8,1000.88,1090.74,1080.43,1066.81,1019.32,1051.22,940.83,956.39,665.61,524.6,322.03,263.49,1733.88,2017.42,1511.2,1343.94,1300.58,867.06]; // CFE bimonthly bills prorated by service day · 2025 at 18 MXN/USD, 2026 at USD paid · Sep 7–Oct 20 2026 est.
+const LV_DAYS=[4,6,0,7,4,9,0,6,0,7,5,5,11,9,0,0,6,16,0,0,5,0]; // days occupied: gas records through Apr 2026; May 2026 onward from trip log (inclusive days)
 
-// ── Per-category routine arrays (from Excel, all 16 months) ──
-// Vendor sub-arrays for tooltip detail
-// Meadowood Repairs & Maintenance vendors
-const MW_RPR_APS=[0,0,0,0,0,0,0,0,0,0,0,0,1022,2080,0,0,0]; // APS Building Services (plumbing/leak)
-const MW_RPR_24H=[0,0,0,0,0,0,0,597,400,0,0,360,0,0,1177,0,0]; // 24 Hour LTD (HVAC/drain)
-const MW_RPR_E2=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // E2 Illumination — in outliers
-const MW_RPR_EMP=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1770,0,0]; // Empire Roofing
-const MW_RPR_REI=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Reilly Homes — already in outliers
-const MW_RPR_IES=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0,0]; // IES network troubleshoot
-const MW_RPR_MP=[0,0,0,0,0,0,0,0,0,128,0,0,0,0,0,0,0]; // MP Access gate service
-// Meadowood Alarm vendors
-const MW_ALM_APX=[0,0,0,0,0,0,0,0,0,0,123,0,539,123,0,0,0]; // Apex Protection
-const MW_ALM_DOM=[0,0,519,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Domotics
-const MW_ALM_IES=[0,0,0,0,0,0,587,0,0,0,0,0,75,0,0,0,0]; // IES alarm monitoring
-const MW_ALM_DPD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Dallas Police permit (sub-threshold)
-// Strawberry Park Cleaning vendors
-const SP_CLN_REN=[0,750,0,1250,0,2350,1150,800,700,0,0,0,400,400,450,1340,800]; // Renova
-const SP_CLN_MTH=[0,0,0,1075,0,0,0,0,0,0,0,0,1795,0,1410,0,0]; // Mountain High (wait — Apr26 is 1795 from Jan26 mountain high)
-const SP_CLN_OSW=[0,0,0,2300,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Oswaldo Romo
-// Strawberry Park Repairs vendors
-const SP_RPR_MOJ=[0,0,0,0,0,4500,450,0,0,0,0,0,0,0,0,0,0]; // Mojo Services screens
-const SP_RPR_SKY=[1263,0,0,350,0,1795,0,0,0,0,0,0,0,0,0,0,0]; // Skyline Mechanical
-const SP_RPR_MNS=[0,0,850,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // M&S Plumbing
-const SP_RPR_REN=[0,0,0,0,0,176,0,254,0,0,0,0,0,0,0,0,0]; // Renova misc repairs
+// ── Vendor sub-arrays for tooltip detail ──
+const MW_RPR_APS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_24H=[0,0,0,0,0,0,0,597,400,0,0,360,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_E2=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_EMP=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_REI=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_IES=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_RPR_MP=[0,0,0,0,0,0,0,0,0,128,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_ALM_APX=[0,0,0,0,0,0,0,0,0,0,123,0,246.81,123.41,0,0,123.41,248.98,0,123.41,0,0]; // Apex Protection — monitoring
+const MW_ALM_DOM=[0,0,519,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_ALM_IES=[0,0,0,0,0,0,587,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_ALM_DPD=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0]; // Dallas Police alarm permit
+const SP_CLN_REN=[0,750,0,1250,0,2350,1150,800,700,0,0,0,400,400,450,1340,0,0,1190.8,1455,1050,970]; // Renova
+const SP_CLN_MTH=[0,0,0,1075,0,0,0,0,0,0,0,0,1795,0,1410,0,0,0,0,0,1385,0]; // Mountain High windows
+const SP_CLN_OSW=[0,0,0,2300,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // Oswaldo Romo
+const SP_RPR_MOJ=[0,0,0,0,0,4500,450,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const SP_RPR_SKY=[1263,0,0,350,0,1795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const SP_RPR_MNS=[0,0,850,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const SP_RPR_REN=[0,0,0,0,0,176,0,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 // Meadowood
-const MW_CAT_INSURANCE=[6766,6817,6815,6815,6964,6887,6887,6887,6887,6887,0,0,7187,7187,7187,0,7187];
-const MW_CAT_LANDSCAPE=[6278,6278,0,6278,6278,0,6278,6278,6278,6278,6278,6278,6278,6278,6278,6278,6279];
-const MW_CAT_POOL=[265,265,265,0,5195,398,0,318,1746,318,398,2949,598,335,318,318,318];
-const MW_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
-const MW_CAT_HOA=[3000,0,0,0,0,0,0,0,0,0,0,3000,0,0,0,0,0];
-const MW_CAT_REMODEL=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all Garaginization → outliers
-const MW_CAT_PEST=[0,251,251,251,251,251,251,251,251,251,251,251,251,236,264,264,264];
-const MW_CAT_NETWORK=[0,0,0,0,0,482,1996,0,0,0,0,0,0,0,0,0,0];
-const MW_CAT_ALARM=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
-const MW_CAT_INTERNET=[90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90];
+const MW_CAT_INSURANCE=[6766,6817,6815,6815,6964,6887,6887,6887,6887,6887,0,0,7511.72,7187,7187,50252,0,0,0,0,0,0]; // Chubb (ACE Private Risk) · monthly through Mar 2026; Apr 2026 annual renewal $50,252
+const MW_CAT_LANDSCAPE=[6278,6278,0,6278,6278,0,6278,6278,6278,6278,6278,6278,6278.5,6278.5,6278.5,12557,6278.5,6749.39,6749.39,6749.39,6749.39,0]; // Richardson monthly fee · $6,749.39 from Jun 2026
+const MW_CAT_POOL=[265,265,265,0,5195,398,0,318,1746,318,398,2949,597.82,334.76,318.26,318.26,397.82,810.79,533.13,318.26,318.26,0];
+const MW_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all one-time → outliers
+const MW_CAT_HOA=[3000,0,0,0,0,0,0,0,0,0,0,3000,0,0,0,0,0,0,0,0,0,0];
+const MW_CAT_REMODEL=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all Garaginization → outliers
+const MW_CAT_PEST=[0,251,251,251,251,251,251,251,251,251,251,251,251.14,236.14,263.7,263.7,263.7,263.7,263.7,263.7,263.7,263.7];
+const MW_CAT_NETWORK=[0,0,0,0,0,482,1996,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const MW_CAT_ALARM=[0,0,0,0,0,0,0,0,0,0,0,0,246.81,123.41,0,0,123.41,248.98,0,123.41,50,0]; // 2026: Apex monitoring + alarm permit
+const MW_CAT_INTERNET=[90,90,90,90,90,90,90,90,90,90,90,90,90.48,90.48,90.48,90.48,90.48,90.48,90.48,90.48,90.48,90.48];
 // Strawberry Park
-const SP_CAT_INSURANCE=[1794,1794,1794,1794,1794,1794,1794,1794,1794,2110,2108,2108,2108,2108,2108,0,2108];
-const SP_CAT_CLEANING=[0,750,2300,2325,0,2350,1150,800,700,0,0,0,2195,400,1860,1340,800];
-const SP_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
-const SP_CAT_MGMT=[500,1000,0,500,500,500,500,1600,1000,0,500,0,500,500,500,500,500];
-const SP_CAT_POOL=[165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165];
-const SP_CAT_HOA=[1300,0,0,0,0,0,0,0,0,0,0,0,1300,0,0,0,0];
-const SP_CAT_PEST=[110,110,110,113,113,113,113,113,113,113,113,113,113,113,113,113,113];
-const SP_CAT_INTERNET=[92,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95,95];
-const SP_CAT_ALARM=[712,0,0,0,0,0,0,0,0,0,0,0,722,0,0,0,0];
-const SP_CAT_CABLE=[53,53,53,55,55,55,55,55,55,55,57,57,57,57,57,57,57];
+const SP_CAT_INSURANCE=[1794,1794,1794,1794,1794,1794,1794,1794,1794,2110,2108,2108,2108.17,2108.17,2108.17,2108.17,2108.17,2108.17,2108.17,2108.17,2108.17,0];
+const SP_CAT_CLEANING=[0,750,2300,2325,0,2350,1150,800,700,0,0,0,2195,400,1860,1340,0,0,1190.8,1455,2435,970];
+const SP_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all one-time → outliers
+const SP_CAT_MGMT=[500,1000,0,500,500,500,500,1600,1000,0,500,0,500,500,500,500,0,1000,500,500,0,500];
+const SP_CAT_POOL=[165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,0,165,165,165];
+const SP_CAT_HOA=[1300,0,0,0,0,0,0,0,0,0,0,0,1300,0,0,0,0,0,0,0,0,0];
+const SP_CAT_PEST=[110,110,110,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,0,113,113,113];
+const SP_CAT_INTERNET=[92,95,95,95,95,95,95,95,95,95,95,95,94.87,94.87,94.87,94.87,94.87,94.87,94.87,94.87,94.87,94.87];
+const SP_CAT_ALARM=[712,0,0,0,0,0,0,0,0,0,0,0,721.95,0,0,0,0,0,0,0,0,0];
+const SP_CAT_CABLE=[53,53,53,55,55,55,55,55,55,55,57,57,57.08,57.32,57.44,57.44,59.61,59.61,59.61,61.09,61.09,61.09];
+const SP_CAT_LANDSVC=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1080,1080,0,0,0]; // Mountain Valley Ventures — weed & tree care
+const SP_CAT_MISC=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,0,400,0,240,925,0]; // Renova errands/car moves, fire sprinkler inspection
 // Las Ventanas
-const LV_CAT_HOA=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126,8126,8126,8126,8126]; // matches LV_HO — Rosewood monthly dues
-const LV_CAT_INSURANCE=[0,0,0,0,0,0,0,0,11490,0,0,0,0,0,0,0,0];
-const LV_CAT_CLEANING=[0,0,0,0,230,900,0,200,150,0,200,800,400,200,0,0,230];
-const LV_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all One-Time → outliers
-const LV_CAT_MGMT=[0,303,0,0,0,559,0,0,0,0,0,0,0,0,0,418,0];
-const LV_CAT_ELEC=LV_EL; // CFE electricity estimate (bimonthly split)
+const LV_CAT_HOA=[8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8118,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36,8126.36]; // matches LV_HO
+const LV_CAT_INSURANCE=[0,0,0,0,0,0,0,0,11490,0,0,0,0,0,0,0,0,0,0,0,0,9818.76];
+const LV_CAT_CLEANING=[0,0,0,0,230,900,0,200,150,0,200,800,400,200,0,0,0,32.75,0,0,0,0];
+const LV_CAT_REPAIRS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; // all one-time → outliers
+const LV_CAT_MGMT=[0,303,0,0,0,559,0,0,0,0,0,0,0,0,0,417.6,243.6,469.8,243.6,208.8,208.8,0]; // admin + maintenance supervision fees
+const LV_CAT_TAX=[0,0,0,0,0,0,0,0,0,0,0,0,5601.27,0,0,0,0,0,0,0,580,0]; // property tax + trust permit fee
+const LV_CAT_WATER=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,61.31,0,57.65,0,0,94.67,0];
+const LV_CAT_ELEC=LV_EL;
 
-// Routine monthly totals (recurring only — Meadowood landscaping one-times excluded)
-const MW_ROUTINE=[18219,15750,9169,14711,20139,9598,17051,15587,16897,15363,8341,14670,16260,19828,21482,8386,15481];
-const SP_ROUTINE=[7183,6582,7130,7176,3609,5695,4505,5281,4489,3098,3686,3785,9177,6068,7372,3575,4646];
-const LV_ROUTINE=[9829,10157,9198,9583,10733,12161,10148,10430,21858,10492,9607,10819,11458,10758,9187,9604,10898];
+// Routine monthly totals = exact sum of category arrays above (recurring only)
+const MW_ROUTINE=[18219,15750,9169,14711,20139,9598,17051,15587,16897,15363,8341,14670,16831.64,19952.44,21483.6,64916.47,8497.2,9678.34,9390.15,9426.85,9643.62,577.59];
+const SP_ROUTINE=[7183,6582,7130,7176,3609,5695,4505,5281,4489,3098,3686,3785,9240.1,6146.64,7586.34,5811.09,3348.56,5727.62,6131.33,6095.75,6914.35,2711.79];
+const LV_ROUTINE=[9293.98,9554.7,8690.8,9052.8,9513.88,11031.74,9198.43,9466.81,20777.32,9443.22,9497.83,10725.39,15835.38,9393.42,8449.86,8868.76,10426.07,11031.6,9897.69,9679.1,10408.38,18812.18];
 
-// Outliers ($2,500+ one-time items)
+// Outliers (one-time items · 2026 includes all one-time GL items regardless of amount)
 const OUTLIERS={
-  0:[{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Protection + Cloth Installation',amt:3056},{prop:'MW',vendor:'Meadowood Estates HOA',desc:'Annual HOA Dues',amt:3000}],
+  0:[{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Protection + Cloth Installation',amt:3056}],
   1:[{prop:'MW',vendor:'Richardson Landscape',desc:'T-Post & Tree Wraps Installation',amt:10310},{prop:'MW',vendor:'Richardson Landscape',desc:'Transplant Medium-Sized Trees',amt:4527},{prop:'MW',vendor:'E2 Illumination Designs',desc:'Electrical Work',amt:3695}],
   2:[{prop:'MW',vendor:'Richardson Landscape',desc:'192 Boxwood Wintergreen — plants + labor',amt:16419},{prop:'MW',vendor:'Premier Lighting',desc:'Attic Light, Dining Room, Switches',amt:12625},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Contract — Installment #1',amt:11850},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Zoysia Grass + Irrigation Repairs',amt:10212},{prop:'MW',vendor:'Reilly Homes',desc:'Windows, Painting, Re-Caulking, Labor',amt:7645},{prop:'MW',vendor:'Richardson Landscape',desc:'Fertilizer Combo Mix (200 gal tank)',amt:6820},{prop:'MW',vendor:'Richardson Landscape',desc:'Remove Mistletoe + Light Prune All Trees',amt:5304},{prop:'MW',vendor:'Richardson Landscape',desc:'Labor — Removing Excess Soil, Planting',amt:5196}],
   3:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Upper Terrace Railing + Management Fees',amt:11717},{prop:'MW',vendor:'Apex Protection Services',desc:'Security System Installation',amt:8622},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Pool Repairs + Professional Cleaning',amt:4295}],
@@ -645,14 +648,19 @@ const OUTLIERS={
   5:[{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Full Network Installation',amt:11481},{prop:'SP',vendor:'Holy Cross Custom Builders',desc:'Repairs to Frozen Drain Pipes',amt:4859},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Floor Sealing',amt:4771},{prop:'MW',vendor:'Premier Lighting',desc:'Landscape Lighting Repairs',amt:3616},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Network Services — Additional Work',amt:3177}],
   6:[{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Network Services — Phase 2',amt:6215}],
   7:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'AC Unit Repairs + Maintenance',amt:5381},{prop:'MW',vendor:'24 Hour LTD',desc:'Replacing Evaporator Coil — HVAC',amt:4139},{prop:'SP',vendor:'Cazares Plastering',desc:'Remove Caulk Around Windows',amt:2640}],
-  8:[{prop:'LV',vendor:'HUB International',desc:'Las Ventanas Annual Insurance Policy',amt:11490},{prop:'SP',vendor:'High Quality Masonry',desc:'Replace Stone Caps on Retaining Wall + Regrout',amt:3800},{prop:'SP',vendor:'Loff Roofing Services',desc:'Snow Stop Installation + Rehang Heat Tape',amt:2860},{prop:'MW',vendor:'Richardson Landscape',desc:'Repair Irrigation System',amt:2583}],
-  11:[{prop:'MW',vendor:'APS Building Services',desc:'Plumbing System Leak Repair',amt:5307},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Extras Invoice #801SP-2025-E1',amt:4366},{prop:'MW',vendor:'Meadowood Estates HOA',desc:'Annual HOA Dues',amt:3000}],
+  8:[{prop:'SP',vendor:'High Quality Masonry',desc:'Replace Stone Caps on Retaining Wall + Regrout',amt:3800},{prop:'SP',vendor:'Loff Roofing Services',desc:'Snow Stop Installation + Rehang Heat Tape',amt:2860},{prop:'MW',vendor:'Richardson Landscape',desc:'Repair Irrigation System',amt:2583}],
   10:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Wooden Beams Replacement',amt:7082}],
-  12:[{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 7 Live Oaks + Labor + Sales Tax',amt:44022},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Pump',amt:10285},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Installment 1',amt:9378},{prop:'SP',vendor:'Cazares Plastering',desc:'Bunk Bed Stain + Two Coats of Lacquer',amt:4220},{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Cloth Service + Labor',amt:2990}],
-  13:[{prop:'MW',vendor:'NTS Contractors',desc:'Concrete Work',amt:12774},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Installment 2',amt:9378}],
-  14:[{prop:'MW',vendor:'Richardson Landscape',desc:'Irrigation Repairs, Maintenance + Cleanup',amt:4085}],
-  15:[{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #1',amt:12900},{prop:'MW',vendor:'Richardson Landscape',desc:'Vault Trapdoor with Mesh — Fabrication & Installation',amt:5093}],
-  16:[{prop:'MW',vendor:'Richardson Landscape',desc:'Pump Cleaning & Flower Planting',amt:6584},{prop:'MW',vendor:'Richardson Landscape',desc:'Planting — Boxwoods & Azaleas',amt:22775},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #2',amt:12900}]
+  11:[{prop:'MW',vendor:'APS Building Services',desc:'Plumbing System Leak Repair',amt:5307},{prop:'SP',vendor:'Intermountain Landscaping',desc:'2025 Extras Invoice #801SP-2025-E1',amt:4366}],
+  12:[{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 7 Live Oaks + Labor + Sales Tax',amt:44022.2},{prop:'MW',vendor:'Richardson Landscape',desc:'Install New Pump',amt:10285.15},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Deposits',amt:9378.1},{prop:'MW',vendor:'Staffordshire Interiors',desc:'Barstools & Fabric',amt:6195.58},{prop:'SP',vendor:'Cazares Plastering',desc:'Bunk Bed Stain + Two Coats of Lacquer',amt:4220},{prop:'MW',vendor:'Richardson Landscape',desc:'Frost Cloth Service + Labor',amt:2989.75},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Hurricane Recovery Fee / Clean-Up',amt:2089.46},{prop:'MW',vendor:'Richardson Landscape',desc:'Planted 28 Pansies + Labor',amt:1613.24},{prop:'SP',vendor:'AD Roofing',desc:'Roof Heating Cable',amt:1125},{prop:'MW',vendor:'APS Building Services',desc:'Service Call — Water Leak',amt:1021.62},{prop:'MW',vendor:'Apex Protection Services',desc:'New Water Leak Sensor — Pantry',amt:292.28},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'AV Service Call',amt:75}],
+  13:[{prop:'MW',vendor:'Anna Ritter',desc:'Furniture — Invoice #2022026',amt:23640.51},{prop:'MW',vendor:'NTS Contractors',desc:'Concrete Work',amt:12773.5},{prop:'MW',vendor:'Garaginization',desc:'Garage Cabinets + Floor Coating — Balance',amt:9378.1},{prop:'MW',vendor:'Richardson Landscape',desc:'Irrigation Repairs + Parts + Labor',amt:8901.24},{prop:'MW',vendor:'Richardson Landscape',desc:'Oct–Dec 2025 Pump Cleaning, Power Washing, Mulch & Planting',amt:5323.84},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Outdoor Teka Furniture',amt:3398.8},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Incidentals During Stay',amt:2141.07},{prop:'MW',vendor:'APS Building Services',desc:'Service Call — Water Leak',amt:2080.31},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Wine Cellar Door Adjustment',amt:198.18}],
+  14:[{prop:'MW',vendor:'Reilly Homes',desc:'Demo Attic, Drywall, Painting',amt:24720},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Incidentals During Stay',amt:4169},{prop:'MW',vendor:'Richardson Landscape',desc:'Irrigation Repairs/Maintenance, Clean Up',amt:4084.57},{prop:'MW',vendor:'Empire Roofing',desc:'Gutter Repairs',amt:1769.89},{prop:'MW',vendor:'Richardson Landscape',desc:'Damaged Sod Repairs',amt:1320.65},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Outdoor Chair Covers',amt:671},{prop:'MW',vendor:'24 Hour, LTD',desc:'Service Call — Fitness Room',amt:600},{prop:'MW',vendor:'24 Hour, LTD',desc:'Service Call — HVAC',amt:576.57},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Network Troubleshooting',amt:200}],
+  15:[{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #1',amt:12900},{prop:'MW',vendor:'Richardson Landscape',desc:'Pump Cleaning, Valve Work, Planting (Penta Mix, Hydrangeas)',amt:6584.14},{prop:'MW',vendor:'Richardson Landscape',desc:'Vault Trapdoor Installation',amt:5093.23},{prop:'MW',vendor:'FST Repair',desc:'New Ice Maker',amt:5001.15},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Barstool Chair Covers',amt:1317.29}],
+  16:[{prop:'MW',vendor:'Patterned Concrete of Dallas',desc:'Driveway Work — Deposit + Balance',amt:26825},{prop:'MW',vendor:'Richardson Landscape',desc:'Boxwoods, Penta Mix, Azaleas, Mulch + Labor',amt:21636.59},{prop:'MW',vendor:'4Site Roofing',desc:'Remove Tar from Hip Shingles + Seal',amt:13800},{prop:'SP',vendor:'Ricardo Bustillos',desc:'Bunk Beds',amt:10850},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Maintenance Reserve Fund — 50% Installment',amt:7796.53},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Wooden Beam Replacement',amt:4469.57},{prop:'SP',vendor:'AD Roofing',desc:'Snow Stops + Roof Heating Cable',amt:3750},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Penthouse Keypad',amt:1194.8},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Install Router Access Points',amt:735.64},{prop:'MW',vendor:'FST Repair',desc:'Ice Maker Installation',amt:399}],
+  17:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Bedroom Work — Outlets, Dimmers, Wall Lamps',amt:8160.64},{prop:'LV',vendor:'Citi Cards (acct 3393)',desc:'Payment on Account — detail pending',amt:4095.69},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Gate Programming, Keypad, Access Points',amt:3448.1},{prop:'MW',vendor:'Richardson Landscape',desc:'Pump Cleaning + Irrigation Repairs',amt:2796.76},{prop:'MW',vendor:'Reilly Homes',desc:'French Doors',amt:2506.26},{prop:'SP',vendor:'Ricardo Bustillos',desc:'Bunk Beds — Balance',amt:555},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'New Table',amt:528.97},{prop:'MW',vendor:'E2 Illumination Designs',desc:'Relocate Downlighting Unit',amt:240},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Blanket',amt:85.47}],
+  18:[{prop:'MW',vendor:'NTS Contractors',desc:'Asphalt Repairs / Driveway Work',amt:9093},{prop:'MW',vendor:'Richardson Landscape',desc:'Repair/Modify Irrigation Components',amt:1039.52},{prop:'SP',vendor:'Cazares Plastering',desc:'Painting Metal on Stairs',amt:1010},{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Driveway Fix for Gate Opening',amt:281.25},{prop:'SP',vendor:'M&S Plumbing',desc:'Plumbing Service',amt:220},{prop:'MW',vendor:'National Acrylic Tubworks',desc:'Master Tub Work',amt:180}],
+  19:[{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Kitchen Cabinet Work',amt:4524},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Pillow Cases',amt:650.65}],
+  20:[{prop:'SP',vendor:'Intermountain Landscaping',desc:'2026 Contract — Installment #2',amt:12900},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Maintenance Reserve Fund — 50% Installment',amt:7796.53},{prop:'MW',vendor:'Staffordshire Interiors',desc:'Christmas Ribbons & Ornaments',amt:3525.74},{prop:'MW',vendor:'APS Building Services',desc:'Gas Pressure Test & Inspection',amt:2828.19},{prop:'LV',vendor:'Las Ventanas al Paraíso',desc:'Maintenance Supplies',amt:348},{prop:'MW',vendor:'Premier Leak Protection',desc:'Service Call — Leak',amt:135.31}],
+  21:[{prop:'MW',vendor:'Integrated Electronic Solutions',desc:'Gate Maintenance',amt:481.25},{prop:'MW',vendor:'E2 Illumination Designs',desc:'New LV Lamp + Light Repairs',amt:335}]
 };
 
 const PROP_COLOR={MW:'#B08A2E',SP:'#276663',LV:'#BE4432'};
@@ -661,22 +669,22 @@ const PROP_ACCENT={MW:'gold',SP:'teal',LV:'coral'};
 
 // ═══ PRESETS ═══
 const PRESETS={
-  ytd26:{label:'2026 YTD · Jan – May',r:[12,16]},
+  ytd26:{label:'2026 YTD · Jan – Oct 20',r:[12,21]},
   fy2025:{label:'FY 2025 · Jan – Dec',r:[0,11]}
 };
-let CR=[12,16];
+let CR=[12,21];
 let mwView='all';
 
 
 // ── Category tooltip detail data ──
 const CAT_DETAIL = {
   MW: {
-    'Insurance':                [{v:'Chubb',arr:'MW_CAT_INSURANCE',note:'$6,766–$7,187/mo · property & liability'}],
-    'Landscaping (Richardson)': [{v:'Richardson Landscape, Inc.',arr:'MW_CAT_LANDSCAPE',note:'$6,278.50/mo fixed monthly fee'}],
-    'Electricity (Cirro)':      [{v:'Cirro Energy (acct #21-253-869-8)',arr:'MW_EL',note:'See utility ledger for monthly detail'}],
+    'Insurance':                [{v:'Chubb (ACE Private Risk)',arr:'MW_CAT_INSURANCE',note:'Monthly $6,766–$7,187 through Mar 2026 · Apr 2026 annual renewal $50,252 paid in full'}],
+    'Landscaping (Richardson)': [{v:'Richardson Landscape, Inc.',arr:'MW_CAT_LANDSCAPE',note:'$6,278.50/mo · $6,749.39/mo from Jun 2026 (two fees booked in Apr 2026)'}],
+    'Electricity (Cirro / NRG)':[{v:'Cirro Energy → NRG (Jul 2026)',arr:'MW_EL',note:'NRG acct 25-618-112-4 · fixed $0.0674/kWh energy rate'}],
     'Pool service':             [{v:'First Class Pools & Spas',arr:'MW_CAT_POOL',note:'Monthly service + occasional repairs'}],
     'Gas (Atmos)':              [{v:'Atmos Energy (acct #4012292205)',arr:'MW_GA',note:'See utility ledger for monthly detail'}],
-    'Water (Dallas Water)':     [{v:'Dallas Water (acct #100783634)',arr:'MW_WA',note:'See utility ledger · Dec 25–Mar 26 leak anomaly'}],
+    'Water (Dallas Water)':     [{v:'Dallas Water (new acct #1000256489)',arr:'MW_WA',note:'Dec 25–Mar 26 leak · credit granted, no bills since May 2026'}],
     'Repairs & maintenance':    [
       {v:'APS Building Services',arr:'MW_RPR_APS'},
       {v:'24 Hour, LTD',arr:'MW_RPR_24H'},
@@ -689,14 +697,14 @@ const CAT_DETAIL = {
     'HOA dues':                 [{v:'Meadowood Estates HOA',arr:'MW_CAT_HOA',note:'$3,000/yr · billed annually'}],
     'Pest control':             [{v:'Forterra Pest Control',arr:'MW_CAT_PEST',note:'~$251/mo'}],
     'Alarm monitoring':         [
-      {v:'Apex Protection Services',arr:'MW_ALM_APX'},
+      {v:'Apex Protection Services (monitoring)',arr:'MW_ALM_APX'},
       {v:'Domotics',arr:'MW_ALM_DOM'},
       {v:'Integrated Electronic Solutions',arr:'MW_ALM_IES'},
       {v:'Dallas Police (permit)',arr:'MW_ALM_DPD'}
     ],
     'Network installation':     [{v:'Integrated Electronic Solutions',arr:'MW_CAT_NETWORK',note:'Monitoring & ongoing service'}],
     'Internet':                 [{v:'AT&T Internet',arr:'MW_CAT_INTERNET',note:'$90.48/mo'}],
-    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items · scroll down'}],
   },
   SP: {
     'Insurance':          [{v:'Chubb',arr:'SP_CAT_INSURANCE',note:'$1,794–$2,108/mo · Chubb homeowner policy'}],
@@ -720,18 +728,22 @@ const CAT_DETAIL = {
     'Pest control':             [{v:'Orkin',arr:'SP_CAT_PEST',note:'$113/mo · monthly service'}],
     'Internet':                 [{v:'Comcast',arr:'SP_CAT_INTERNET',note:'~$95/mo'}],
     'Alarm monitoring':         [{v:'Fischer Alarm Systems, LLC',arr:'SP_CAT_ALARM',note:'Annual contract · $722/yr'}],
-    'Cable':                    [{v:'CenturyLink',arr:'SP_CAT_CABLE',note:'~$57/mo'}],
-    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+    'Cable':                    [{v:'CenturyLink',arr:'SP_CAT_CABLE',note:'~$57–$61/mo'}],
+    'Landscape services':       [{v:'Mountain Valley Ventures, Inc.',arr:'SP_CAT_LANDSVC',note:'Weed control, tree spraying & feeding'}],
+    'Misc. services':           [{v:'Renova / Vail Valley Fire Sprinkler',arr:'SP_CAT_MISC',note:'Errands, car moves, annual fire sprinkler inspection'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items · scroll down'}],
   },
   LV: {
     'HOA dues (Rosewood)':      [{v:'Las Ventanas al Paraíso (Rosewood)',arr:'LV_CAT_HOA',note:'$8,118–$8,126/mo · includes all resort amenities'}],
-    'Insurance (HUB Intl.)':    [{v:'HUB International',arr:'LV_CAT_INSURANCE',note:'Annual policy · billed Sep 2025'}],
-    'Electricity (CFE est.)':   [{v:'CFE (Comisión Federal de Electricidad)',arr:'LV_EL',note:'Bimonthly DAC tariff · ~18 MXN/USD · monthly est.'}],
+    'Insurance (HUB Intl.)':    [{v:'HUB International',arr:'LV_CAT_INSURANCE',note:'Annual policy · Sep 2025 $11,490 · Oct 2026 renewal $9,819 (9/18/26–9/18/27)'}],
+    'Electricity (CFE est.)':   [{v:'CFE (Comisión Federal de Electricidad)',arr:'LV_EL',note:'Bimonthly DAC bills prorated by service day · Sep 7–Oct 20 2026 estimated (bill pending)'}],
     'Gas (Rosewood)':           [{v:'Rosewood Hotels (usage-based)',arr:'LV_GA',note:'Billed per occupancy period · zero = unoccupied'}],
-    'Cleaning':                 [{v:'Various cleaning vendors',arr:'LV_CAT_CLEANING',note:'9 transactions Jan 2025–Dec 2025'}],
+    'Cleaning':                 [{v:'Various cleaning vendors',arr:'LV_CAT_CLEANING',note:'House cleaning between stays'}],
     'Repairs & maintenance':    [{v:'Las Ventanas al Paraíso',arr:'LV_CAT_REPAIRS',note:'Pool, audio system & misc repairs'}],
-    'Management fees':          [{v:'Las Ventanas al Paraíso (Rosewood)',arr:'LV_CAT_MGMT',note:'Management & admin fees'}],
-    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items $2,500+ · scroll down'}],
+    'Management fees':          [{v:'Las Ventanas al Paraíso (Rosewood)',arr:'LV_CAT_MGMT',note:'Admin service fee + $208.80/mo maintenance supervision'}],
+    'Property tax & trust fee': [{v:'Los Cabos predial + Paraiso Partners trust permit',arr:'LV_CAT_TAX',note:'2026 property tax $5,601 (Jan) · trust fee $580 (Sep)'}],
+    'Water (Rosewood)':         [{v:'Rosewood (usage-based)',arr:'LV_CAT_WATER',note:'Billed quarterly on owner statement'}],
+    'Outliers / capex':         [{v:'See outlier transaction detail below',arr:null,note:'One-time items · scroll down'}],
   }
 };
 
@@ -970,7 +982,7 @@ function svgTipShow(e, rect) {
       html += '<div class="svg-tip-row" style="margin-top:5px;padding-top:5px;border-top:1px solid rgba(26,25,22,0.08)">' +
         '<span class="svg-tip-dot" style="background:' + r.color + '"></span>' +
         '<span class="svg-tip-label">' + r.label + '</span>' +
-        '<span class="svg-tip-val">' + r.value + (r.value === 1 ? ' day' : ' days') + '</span>' +
+        '<span class="svg-tip-val">' + (r.value==null ? 'not yet recorded' : r.value + (r.value === 1 ? ' day' : ' days')) + '</span>' +
         '</div>';
       return;
     }
@@ -1045,6 +1057,7 @@ function getArr(name) {
     SP_RPR_MOJ:SP_RPR_MOJ, SP_RPR_SKY:SP_RPR_SKY, SP_RPR_MNS:SP_RPR_MNS, SP_RPR_REN:SP_RPR_REN,
     LV_CAT_HOA:LV_CAT_HOA, LV_CAT_INSURANCE:LV_CAT_INSURANCE, LV_EL:LV_EL,
     LV_GA:LV_GA, LV_CAT_CLEANING:LV_CAT_CLEANING, LV_CAT_REPAIRS:LV_CAT_REPAIRS, LV_CAT_MGMT:LV_CAT_MGMT,
+    LV_CAT_TAX:LV_CAT_TAX, LV_CAT_WATER:LV_CAT_WATER, SP_CAT_LANDSVC:SP_CAT_LANDSVC, SP_CAT_MISC:SP_CAT_MISC,
   };
   return lookup[name] || null;
 }
@@ -1258,7 +1271,7 @@ function setRange(){
 
 // ═══ ALERTS ═══
 function updateAlerts(){
-  const show=CR[0]<=14&&CR[1]>=11;
+  const show=CR[0]<=21&&CR[1]>=11;
   ['alert-leak','alert-mw'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display=show?'flex':'none';});
 }
 
@@ -1293,8 +1306,8 @@ function buildOutlierList(containerId,prop){
 
 // ═══ SUMMARY ═══
 
-// T13M window: Apr 2025 (idx 3) through Apr 2026 (idx 15) — fixed, never changes
-const T_S=4, T_E=16, T_N=13;
+// T13M window: Oct 2025 (idx 9) through Oct 2026 (idx 21, partial) — fixed, filter-independent
+const T_S=9, T_E=21, T_N=13;
 
 function buildSummaryCharts(){
   const tL=LABELS.slice(T_S,T_E+1);
@@ -1335,7 +1348,7 @@ function renderSummary(){
   set('pc-sp-sub','Routine '+fmtK(spR)+' + outliers '+fmtK(spO));
   set('pc-lv',fmtK(lvR+lvO));
   set('pc-lv-sub','Routine '+fmtK(lvR)+' + outliers '+fmtK(lvO));
-  // Averages always reflect the fixed T13M window (May 2025 – May 2026), not the filter
+  // Averages always reflect the fixed T13M window (Oct 2025 – Oct 2026), not the filter
   const t13mwR=MW_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
   const t13spR=SP_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
   const t13lvR=LV_ROUTINE.slice(T_S,T_E+1).reduce((t,v)=>t+(v||0),0);
@@ -1351,10 +1364,10 @@ function renderMW(){
   const n=Math.max(1,CR[1]-CR[0]+1);
   const totO=outlierSum('MW');
   document.getElementById('mw-kpis').innerHTML=`
-    <div class="kpi"><div class="kpi-label">Electricity (Cirro)</div><div class="kpi-value">${fmtK(ssm(MW_EL))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_EL)/n)+'/mo':'Single month'}</div></div>
+    <div class="kpi"><div class="kpi-label">Electricity (Cirro / NRG)</div><div class="kpi-value">${fmtK(ssm(MW_EL))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_EL)/n)+'/mo':'Single month'}</div></div>
     <div class="kpi"><div class="kpi-label">Gas (Atmos)</div><div class="kpi-value">${fmtK(ssm(MW_GA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_GA)/n)+'/mo':'Single month'}</div></div>
     <div class="kpi"><div class="kpi-label">Water (Dallas Water)</div><div class="kpi-value gold">${fmtK(ssm(MW_WA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(MW_WA)/n)+'/mo':'Single month'}</div></div>
-    <div class="kpi"><div class="kpi-label">Landscaping (Richardson)</div><div class="kpi-value">${fmtK(n*6278.5)}</div><div class="kpi-sub">$6,278.50/mo fixed</div></div>`;
+    <div class="kpi"><div class="kpi-label">Landscaping (Richardson)</div><div class="kpi-value">${fmtK(ssm(MW_CAT_LANDSCAPE))}</div><div class="kpi-sub">Monthly fee · $6,749/mo from Jun 26</div></div>`;
   buildMWChart();
   mk('mwKwhChart',{type:'line',data:{labels:slL(),datasets:[{label:'kWh',data:sl(MW_KW),borderColor:'#B08A2E',backgroundColor:'rgba(176,138,46,0.07)',fill:true,tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#FFF',titleColor:'#1A1916',bodyColor:'#4A4740',borderColor:'rgba(26,25,22,0.12)',borderWidth:1,padding:10,cornerRadius:8,titleFont:{family:FONT,size:12,weight:'500'},bodyFont:{family:FONT,size:12}}},
@@ -1363,7 +1376,7 @@ function renderMW(){
   const mwCats=[
     {n:'Insurance',          r:ssm(MW_CAT_INSURANCE), o:0},
     {n:'Landscaping (Richardson)', r:ssm(MW_CAT_LANDSCAPE), o:0},
-    {n:'Electricity (Cirro)',r:ssm(MW_EL),             o:0},
+    {n:'Electricity (Cirro / NRG)',r:ssm(MW_EL),       o:0},
     {n:'Pool service',       r:ssm(MW_CAT_POOL),       o:0},
     {n:'Gas (Atmos)',        r:ssm(MW_GA),              o:0},
     {n:'Water (Dallas Water)',r:ssm(MW_WA),             o:0},
@@ -1387,14 +1400,14 @@ function renderMW(){
     }).join('')+
     `<tr class="row-total"><td>Total</td><td class="num">${fmt(mwRoutTotal)}</td><td class="num">${fmt(mwOutTotal)}</td><td class="num">${fmt(mwGrand)}</td></tr>`;
   const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tL=0;
-  for(let i=s;i<=e;i++){const el=MW_EL[i]||0,ga=MW_GA[i]||0,wa=MW_WA[i]||0,la=6278.5;tE+=el;tG+=ga;tW+=wa;tL+=la;
+  for(let i=s;i<=e;i++){const el=MW_EL[i]||0,ga=MW_GA[i]||0,wa=MW_WA[i]||0,la=MW_CAT_LANDSCAPE[i]||0;tE+=el;tG+=ga;tW+=wa;tL+=la;
     lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ga)}</td><td class="num">${fmt(wa)}</td><td class="num">${fmt(la)}</td><td class="num">${fmt(el+ga+wa+la)}</td></tr>`;}
   lh+=`<tr class="row-total"><td>Total</td><td class="num">${fmt(tE)}</td><td class="num">${fmt(tG)}</td><td class="num">${fmt(tW)}</td><td class="num">${fmt(tL)}</td><td class="num">${fmt(tE+tG+tW+tL)}</td></tr>`;
   document.getElementById('mwLedger').innerHTML=lh;
   buildOutlierList('mwOutlierList','MW');
 }
 function buildMWChart(){
-  // Utility chart always T13M (May 2025 – May 2026), filter-independent
+  // Utility chart always T13M (Oct 2025 – Oct 2026), filter-independent
   const lb=LABELS.slice(T_S,T_E+1);
   const tsl=a=>a.slice(T_S,T_E+1).map(v=>v===null?null:v);
   const ds=[],st=mwView==='all';
@@ -1412,15 +1425,15 @@ function renderSP(){
     <div class="kpi"><div class="kpi-label">Electricity (Holy Cross)</div><div class="kpi-value">${fmtK(ssm(SP_EL))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(SP_EL)/n)+'/mo':'Single month'}</div></div>
     <div class="kpi"><div class="kpi-label">Gas (Xcel Energy)</div><div class="kpi-value">${fmtK(ssm(SP_GA))}</div><div class="kpi-sub">${n>1?'Avg '+fmt(ssm(SP_GA)/n)+'/mo':'Single month'}</div></div>
     <div class="kpi"><div class="kpi-label">Water (Eagle River)</div><div class="kpi-value">${fmtK(ssm(SP_WA))}</div><div class="kpi-sub">Period total</div></div>
-    <div class="kpi"><div class="kpi-label">Prop. Mgmt (Renova)</div><div class="kpi-value">${fmtK(n*500)}</div><div class="kpi-sub">$500/mo fixed</div></div>
+    <div class="kpi"><div class="kpi-label">Prop. Mgmt (Renova)</div><div class="kpi-value">${fmtK(ssm(SP_CAT_MGMT))}</div><div class="kpi-sub">$500/mo · as billed</div></div>
     <div class="kpi"><div class="kpi-label">Landscaping (Intermountain)</div><div class="kpi-value teal">${fmtK(ssm(SP_LAND))}</div><div class="kpi-sub">Actual payments</div></div>`;
   // Utility chart always T13M
   var spT13L=LABELS.slice(T_S,T_E+1);
   var spTsl=function(a){return a.slice(T_S,T_E+1).map(function(v){return v===null?null:v;});};
-  mk('spChart',{type:'bar',data:{labels:spT13L,datasets:[{label:'Electricity',data:spTsl(SP_EL),backgroundColor:'#378ADD'},{label:'Gas',data:spTsl(SP_GA),backgroundColor:'#276663'},{label:'Water',data:spTsl(SP_WA),backgroundColor:'#4A8A30'}]},options:{...cOpts(true),maxVal:2000}});
+  mk('spChart',{type:'bar',data:{labels:spT13L,datasets:[{label:'Electricity',data:spTsl(SP_EL),backgroundColor:'#378ADD'},{label:'Gas',data:spTsl(SP_GA),backgroundColor:'#276663'},{label:'Water',data:spTsl(SP_WA),backgroundColor:'#4A8A30'}]},options:{...cOpts(true),maxVal:3000}});
   mk('spGasChart',{type:'line',data:{labels:M12,datasets:[
     {label:'2025',data:[1475,1671,1614,1096,384,108,54,117,86,101,152,601],borderColor:'#276663',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#276663',borderWidth:2},
-    {label:'2026',data:[856,1396,1182,490,null,null,null,null,null,null,null,null],borderColor:'#B08A2E',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2,borderDash:[5,3]}
+    {label:'2026',data:SP_GA.slice(12,LAST_IDX+1).concat(Array(12-(LAST_IDX-11)).fill(null)),borderColor:'#B08A2E',backgroundColor:'transparent',tension:0.35,pointRadius:3,pointBackgroundColor:'#B08A2E',borderWidth:2,borderDash:[5,3]}
   ]},options:cOpts(false)});
   const spCats=[
     {n:'Insurance',        r:ssm(SP_CAT_INSURANCE), o:0},
@@ -1436,6 +1449,8 @@ function renderSP(){
     {n:'Internet',               r:ssm(SP_CAT_INTERNET),  o:0},
     {n:'Alarm monitoring',       r:ssm(SP_CAT_ALARM),     o:0},
     {n:'Cable',                  r:ssm(SP_CAT_CABLE),     o:0},
+    {n:'Landscape services',     r:ssm(SP_CAT_LANDSVC),   o:0},
+    {n:'Misc. services',         r:ssm(SP_CAT_MISC),      o:0},
     {n:'Outliers / capex',       r:0,                     o:totO},
   ].filter(row=>row.r+row.o>0).sort((a,b)=>(b.r+b.o)-(a.r+a.o));
   const spRoutTotal=spCats.reduce((t,r)=>t+r.r,0);
@@ -1449,8 +1464,8 @@ function renderSP(){
     }).join('')+
     `<tr class="row-total"><td>Total</td><td class="num">${fmt(spRoutTotal)}</td><td class="num">${fmt(spOutTotal)}</td><td class="num">${fmt(spGrand)}</td></tr>`;
   const[s,e]=CR;let lh='',tE=0,tG=0,tW=0,tM=0,tL=0;
-  for(let i=s;i<=e;i++){const el=SP_EL[i]||0,ga=SP_GA[i]||0,wa=SP_WA[i]||0,mg=500,la=SP_LAND[i]||0;tE+=el;tG+=ga;tW+=wa;tM+=mg;tL+=la;
-    let note='';if(la===11850)note=' <span style="font-size:10px;color:#9A968C">(contract pmt)</span>';else if(la===4366)note=' <span style="font-size:10px;color:#9A968C">(extras)</span>';else if(la===12900)note=' <span style="font-size:10px;color:#9A968C">(2026 #1)</span>';
+  for(let i=s;i<=e;i++){const el=SP_EL[i]||0,ga=SP_GA[i]||0,wa=SP_WA[i]||0,mg=SP_CAT_MGMT[i]||0,la=SP_LAND[i]||0;tE+=el;tG+=ga;tW+=wa;tM+=mg;tL+=la;
+    let note='';if(la===11850)note=' <span style="font-size:10px;color:#9A968C">(contract pmt)</span>';else if(la===4366)note=' <span style="font-size:10px;color:#9A968C">(extras)</span>';else if(la===12900)note=' <span style="font-size:10px;color:#9A968C">(2026 #'+(i<=15?1:2)+')</span>';
     lh+=`<tr><td>${LABELS[i]}</td><td class="num">${fmt(el)}</td><td class="num">${fmt(ga)}</td><td class="num">${fmt(wa)}</td><td class="num">${fmt(mg)}</td><td class="num">${la>0?fmt(la)+note:'—'}</td><td class="num">${fmt(el+ga+wa+mg+la)}</td></tr>`;}
   lh+=`<tr class="row-total"><td>Total</td><td class="num">${fmt(tE)}</td><td class="num">${fmt(tG)}</td><td class="num">${fmt(tW)}</td><td class="num">${fmt(tM)}</td><td class="num">${fmt(tL)}</td><td class="num">${fmt(tE+tG+tW+tM+tL)}</td></tr>`;
   document.getElementById('spLedger').innerHTML=lh;
@@ -1464,10 +1479,12 @@ function renderSP(){
 // ═══ LAS VENTANAS ═══
 
 
-// ── Cabo San Lucas climate data — T13M (May 2025 – May 2026) ──
-// Source: Visual Crossing actual recorded data. °F, % humidity. Apr 2025–Apr 2026.
-const LV_TEMP_F=[76,79,83,84,83,80,77,74,72,71,74,76,79]; // actual monthly averages Apr 2025–Apr 2026  // avg monthly temp °F
-const LV_HUM=[51,63,64,67,77,71,60,64,63,62,62,57,63]; // actual monthly averages Apr 2025–Apr 2026      // avg monthly humidity %
+// ── Cabo San Lucas climate data — T13M (Oct 2025 – Oct 2026) ──
+
+// Visual Crossing actual recorded data, Oct 2025 – Oct 20, 2026
+const LV_TEMP_F=[77,74,72,71,74,76,79,77,79,84,85,84,83]; // avg monthly temp °F, Oct 25 – Oct 26
+const LV_HUM=[60,64,63,62,62,57,63,56,62,67,71,76,76];    // avg monthly humidity %, Oct 25 – Oct 26
+const LV_WX_EST=[0,0,0,0,0,0,0,0,0,0,0,0,0];              // 1 = estimate
 
 function buildLVWeatherRow(){
   var el=document.getElementById('lvWeatherRow');
@@ -1475,7 +1492,7 @@ function buildLVWeatherRow(){
   var T13L=LABELS.slice(T_S,T_E+1);
   var chartEl=document.getElementById('lvCombinedChart');
   var W=chartEl?chartEl.clientWidth||560:560;
-  var PL=58,PR=12,n=13;
+  var PL=58,PR=12,n=T_N;
   var cW=W-PL-PR;
   var bGroupW=cW/n;
   var LABEL_W=72; // fixed label column width — enough for "Avg Humidity"
@@ -1504,7 +1521,7 @@ function buildLVWeatherRow(){
   html+='<tr style="'+ROW_STYLE+'">';
   html+='<td style="'+LABEL_STYLE+'">Avg Temp</td>';
   for(var i=0;i<n;i++){
-    html+='<td style="'+CELL_STYLE+'">'+LV_TEMP_F[i]+'°F</td>';
+    html+='<td style="'+CELL_STYLE+(LV_WX_EST[i]?'color:#9A968C;font-style:italic;':'')+'">'+LV_TEMP_F[i]+'°F'+(LV_WX_EST[i]?'*':'')+'</td>';
   }
   html+='<td></td></tr>';
 
@@ -1512,7 +1529,7 @@ function buildLVWeatherRow(){
   html+='<tr style="'+ROW_STYLE+'">';
   html+='<td style="'+LABEL_STYLE+'">Avg Humidity</td>';
   for(var i=0;i<n;i++){
-    html+='<td style="'+CELL_STYLE+'">'+LV_HUM[i]+'%</td>';
+    html+='<td style="'+CELL_STYLE+(LV_WX_EST[i]?'color:#9A968C;font-style:italic;':'')+'">'+LV_HUM[i]+'%'+(LV_WX_EST[i]?'*':'')+'</td>';
   }
   html+='<td></td></tr>';
 
@@ -1558,8 +1575,8 @@ function buildLVCombined(){
     // Electricity (top)
     if(elV>0){var elH=(elV/MX)*cH;out.push('<rect x="'+bx.toFixed(1)+'" y="'+yp(elV+gaV).toFixed(1)+'" width="'+bW.toFixed(1)+'" height="'+elH.toFixed(1)+'" fill="#BE4432" rx="2"/>');}
     // Hover rect
-    var days=tslDays[i]||0; var tot=elV+gaV;
-    var rowsData=[{label:'Electricity (CFE est.)',color:'#BE4432',value:elV},{label:'Gas (Rosewood)',color:'#276663',value:gaV},{label:'Days occupied',color:'#B08A2E',value:days,isDays:true}];
+    var days=tslDays[i]; var tot=elV+gaV;
+    var rowsData=[{label:'Electricity (CFE)',color:'#BE4432',value:elV},{label:'Gas (Rosewood)',color:'#276663',value:gaV},{label:'Days occupied',color:'#B08A2E',value:days,isDays:true}];
     var rowsJson=JSON.stringify(rowsData).replace(/"/g,'&quot;');
     out.push('<rect x="'+bx.toFixed(1)+'" y="'+PT+'" width="'+bW.toFixed(1)+'" height="'+cH+'" fill="transparent" data-label="'+lb[i]+'" data-total="'+Math.round(tot)+'" data-rows="'+rowsJson+'" class="svg-hover-rect" onmouseenter="svgTipShow(event,this)" onmouseleave="svgTipHide()" ontouchstart="svgTipTouch(event,this)" ontouchend="svgTipHide()"/>');
   }
@@ -1578,7 +1595,7 @@ function renderLV(){
   const totO=outlierSum('LV');
   document.getElementById('lv-kpis').innerHTML=`
     <div class="kpi"><div class="kpi-label">HOA dues (Rosewood)</div><div class="kpi-value">${fmtK(ssm(LV_HO))}</div><div class="kpi-sub">Period total</div></div>
-    <div class="kpi"><div class="kpi-label">Electricity (CFE est.)</div><div class="kpi-value">${fmtK(ssm(LV_EL))}</div><div class="kpi-sub">MXN → USD ~18:1</div></div>
+    <div class="kpi"><div class="kpi-label">Electricity (CFE)</div><div class="kpi-value">${fmtK(ssm(LV_EL))}</div><div class="kpi-sub">Bimonthly bills prorated by day</div></div>
     <div class="kpi"><div class="kpi-label">Gas (Rosewood)</div><div class="kpi-value">${fmtK(ssm(LV_GA))}</div><div class="kpi-sub">Occupancy-driven</div></div>
 `;
 
@@ -1602,6 +1619,8 @@ function renderLV(){
     {n:'Cleaning',              r:ssm(LV_CAT_CLEANING),  o:0},
     {n:'Repairs & maintenance', r:ssm(LV_CAT_REPAIRS),   o:0},
     {n:'Management fees',       r:ssm(LV_CAT_MGMT),      o:0},
+    {n:'Property tax & trust fee',r:ssm(LV_CAT_TAX),    o:0},
+    {n:'Water (Rosewood)',      r:ssm(LV_CAT_WATER),     o:0},
     {n:'Outliers / capex',      r:0,                     o:totO},
   ].filter(row=>row.r+row.o>0).sort((a,b)=>(b.r+b.o)-(a.r+a.o));
   const lvRoutTotal=lvCats.reduce((t,r)=>t+r.r,0);
